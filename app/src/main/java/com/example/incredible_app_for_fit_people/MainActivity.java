@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbTextView = (TextView) findViewById(R.id.db_text_view);
-        dbEditText = (EditText) findViewById(R.id.db_edit_text);
+//        dbTextView = (TextView) findViewById(R.id.db_text_view);
+//        dbEditText = (EditText) findViewById(R.id.db_edit_text);
 
     }
 
