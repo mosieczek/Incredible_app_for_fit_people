@@ -9,13 +9,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     DBHandler dbHandler;
     TextView dbTextView;
     EditText dbEditText;
+    ListView lv;
 
     private static final int REQUEST_CODE_ADDING = 0;
 
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 //        dbTextView = (TextView) findViewById(R.id.db_text_view);
 //        dbEditText = (EditText) findViewById(R.id.db_edit_text);
 
+        lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
+        lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
+        lv.setClickable(true);
     }
 
     @Override
@@ -60,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 //rób rzeczy
+
+
             }
         }
 

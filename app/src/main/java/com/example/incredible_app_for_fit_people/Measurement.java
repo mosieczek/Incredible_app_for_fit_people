@@ -2,9 +2,10 @@ package com.example.incredible_app_for_fit_people;
 
 import android.content.ContentValues;
 
+
 import java.io.Serializable;
 
-public class Measurements implements Serializable {
+public class Measurement implements Serializable   {
 
     private String data;
     private String szyja;
@@ -26,9 +27,9 @@ public class Measurements implements Serializable {
 
     private transient ContentValues values;
 
-    public Measurements(){}
+    public Measurement(){}
 
-    public Measurements(String data, String szyja, String klatkaPiersiowa, String bicepsLewy,
+    public Measurement(String data, String szyja, String klatkaPiersiowa, String bicepsLewy,
                         String bicepsLewyNapiety, String bicepsPrawy, String bicepsPrawyNapiety,
                         String przedramieLewe, String przedramiePrawe, String talia, String brzuch,
                         String biodra, String udoLewe, String udoPrawe, String lydkaLewa,
