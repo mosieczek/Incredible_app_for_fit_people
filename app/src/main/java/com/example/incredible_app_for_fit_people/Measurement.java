@@ -3,37 +3,71 @@ package com.example.incredible_app_for_fit_people;
 import android.content.ContentValues;
 
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
 import java.io.Serializable;
 
-public class Measurement implements Serializable   {
+@Table(name = "Measurements", id = "_id")
+public class Measurement extends Model {
 
+
+    @Column(name = "Data")
     private String data;
+    @Column(name = "Szyja")
     private String szyja;
+    @Column(name = "Klatka")
     private String klatkaPiersiowa;
+    @Column(name = "BicepsLewy")
     private String bicepsLewy;
+    @Column(name = "BicepsLewyNapiety")
     private String bicepsLewyNapiety;
+    @Column(name = "BicepsPrawy")
     private String bicepsPrawy;
+    @Column(name = "BicepsPrawyNapiety")
     private String bicepsPrawyNapiety;
+    @Column(name = "PrzedramieLewe")
     private String przedramieLewe;
+    @Column(name = "PrzedramiePrawe")
     private String przedramiePrawe;
+    @Column(name = "Talia")
     private String talia;
+    @Column(name = "Brzuch")
     private String brzuch;
+    @Column(name = "Biodra")
     private String biodra;
+    @Column(name = "UdoLewe")
     private String udoLewe;
+    @Column(name = "UdoPrawe")
     private String udoPrawe;
+    @Column(name = "LydkaLewa")
     private String lydkaLewa;
+    @Column(name = "LydkaPrawa")
     private String lydkaPrawa;
+    @Column(name = "TankaTluszczowa")
     private String tkankaTluszczowa;
 
-    private transient ContentValues values;
+//    private transient ContentValues values;
 
-    public Measurement(){}
+    public Measurement(){
+        super();
+    }
+
+    public Measurement(String szyja, String klatkaPiersiowa){
+
+        super();
+        this.szyja = szyja;
+        this.klatkaPiersiowa = klatkaPiersiowa;
+    }
 
     public Measurement(String data, String szyja, String klatkaPiersiowa, String bicepsLewy,
                         String bicepsLewyNapiety, String bicepsPrawy, String bicepsPrawyNapiety,
                         String przedramieLewe, String przedramiePrawe, String talia, String brzuch,
                         String biodra, String udoLewe, String udoPrawe, String lydkaLewa,
                         String lydkaPrawa, String tkankaTluszczowa) {
+
+        super();
         this.data = data;
         this.szyja = szyja;
         this.klatkaPiersiowa = klatkaPiersiowa;
@@ -53,26 +87,26 @@ public class Measurement implements Serializable   {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
-    public void putValues(){
-        values = new ContentValues();
-        values.put(DBHandler.COL1, data);
-        values.put(DBHandler.COL2, szyja);
-        values.put(DBHandler.COL3, klatkaPiersiowa);
-        values.put(DBHandler.COL4, bicepsLewy);
-        values.put(DBHandler.COL5, bicepsLewyNapiety);
-        values.put(DBHandler.COL6, bicepsPrawy);
-        values.put(DBHandler.COL7, bicepsPrawyNapiety);
-        values.put(DBHandler.COL8, przedramieLewe);
-        values.put(DBHandler.COL9, przedramiePrawe);
-        values.put(DBHandler.COL10, talia);
-        values.put(DBHandler.COL11, brzuch);
-        values.put(DBHandler.COL12, biodra);
-        values.put(DBHandler.COL13, udoLewe);
-        values.put(DBHandler.COL14, udoPrawe);
-        values.put(DBHandler.COL15, lydkaLewa);
-        values.put(DBHandler.COL16, lydkaPrawa);
-        values.put(DBHandler.COL17, tkankaTluszczowa);
-    }
+//    public void putValues(){
+//        values = new ContentValues();
+//        values.put(DBHandler.COL1, data);
+//        values.put(DBHandler.COL2, szyja);
+//        values.put(DBHandler.COL3, klatkaPiersiowa);
+//        values.put(DBHandler.COL4, bicepsLewy);
+//        values.put(DBHandler.COL5, bicepsLewyNapiety);
+//        values.put(DBHandler.COL6, bicepsPrawy);
+//        values.put(DBHandler.COL7, bicepsPrawyNapiety);
+//        values.put(DBHandler.COL8, przedramieLewe);
+//        values.put(DBHandler.COL9, przedramiePrawe);
+//        values.put(DBHandler.COL10, talia);
+//        values.put(DBHandler.COL11, brzuch);
+//        values.put(DBHandler.COL12, biodra);
+//        values.put(DBHandler.COL13, udoLewe);
+//        values.put(DBHandler.COL14, udoPrawe);
+//        values.put(DBHandler.COL15, lydkaLewa);
+//        values.put(DBHandler.COL16, lydkaPrawa);
+//        values.put(DBHandler.COL17, tkankaTluszczowa);
+//    }
 
     public String getData() {
         return data;
@@ -210,8 +244,8 @@ public class Measurement implements Serializable   {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
-    public ContentValues getValues() {
-        return values;
-    }
+//    public ContentValues getValues() {
+//        return values;
+//    }
 
 }
