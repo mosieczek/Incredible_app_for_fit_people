@@ -50,11 +50,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
         lv.setClickable(true);
 
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
