@@ -14,11 +14,15 @@ import android.widget.EditText;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddingMeasurementActivity extends AppCompatActivity {
 
     ArrayList<EditText> editTextArrayList;
+    EditText fatEditText;
     Button saveButton;
+    Button calculateButton;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +52,31 @@ public class AddingMeasurementActivity extends AppCompatActivity {
                 finish();
             }});
 
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                //funkcja licząca i wpisujaca tluszcz
+
+                saveButton.setEnabled(true);
+            }});
+
+        calculateButton.setEnabled(false);
         saveButton.setEnabled(false);
+
 
         TextWatcher textListener = new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                Boolean isFieldsEmpty = true;
+                for(EditText et : editTextArrayList){
+
+                    isFieldsEmpty &= !et.getText().toString().isEmpty();
+                }
+
+                calculateButton.setEnabled(isFieldsEmpty);
             }
 
             @Override
@@ -62,9 +86,6 @@ public class AddingMeasurementActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-
-                saveButton.setEnabled(true);
 
             }
         };
@@ -92,9 +113,13 @@ public class AddingMeasurementActivity extends AppCompatActivity {
         editTextArrayList.add((EditText) findViewById(R.id.udoPraweEdit));
         editTextArrayList.add((EditText) findViewById(R.id.lydkaLewaEdit));
         editTextArrayList.add((EditText) findViewById(R.id.lydkaPrawaEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.tkankaTluszczowaEdit));
 
-        saveButton = findViewById(R.id.button);
+        fatEditText = findViewById(R.id.tkankaTluszczowaEdit);
+        fatEditText.setEnabled(false);
+        //editTextArrayList.add((EditText) findViewById(R.id.tkankaTluszczowaEdit));
+
+        saveButton = findViewById(R.id.add);
+        calculateButton = findViewById(R.id.calculate);
     }
 
     public static Intent newIntent(Context packageContext){
