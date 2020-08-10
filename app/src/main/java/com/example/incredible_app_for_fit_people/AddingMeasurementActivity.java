@@ -13,8 +13,14 @@ import android.widget.EditText;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AddingMeasurementActivity extends AppCompatActivity {
 
@@ -36,22 +42,28 @@ public class AddingMeasurementActivity extends AppCompatActivity {
 
     void addListeners(){
 
-
+        //Co sie dzieje po wcisnieciu save button
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-//                Measurement measurement = new Measurement(szyja.getText().toString(),
-//                        klatkaPiersiowa.getText().toString());
+                //Przepisanie listy EditText na String
+                List<String> result = editTextArrayList.stream()
+                        .map( x -> x.getText().toString())
+                        .collect(Collectors.toList());
 
-//                measurement.save();
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+                Measurement measurement = new Measurement(result, currentDate, fatEditText.getText().toString());
+                measurement.save();
 
                 Intent resultIntent = new Intent();
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }});
 
+        ///Co sie dzieje po wcisnieciu oblicz
         calculateButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,14 +74,12 @@ public class AddingMeasurementActivity extends AppCompatActivity {
                 saveButton.setEnabled(true);
             }});
 
-        calculateButton.setEnabled(false);
-        saveButton.setEnabled(false);
-
-
+        ///Reakcja na zmiane tekstu
         TextWatcher textListener = new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                ///Jezeli wszystkie pola sa wpisane to przycisk zostanie wlaczony
                 Boolean isFieldsEmpty = true;
                 for(EditText et : editTextArrayList){
 
@@ -90,6 +100,7 @@ public class AddingMeasurementActivity extends AppCompatActivity {
             }
         };
 
+        ///Przypisanie watchera do wszstkich pól tekstowych
         for(EditText et : editTextArrayList){
 
             et.addTextChangedListener(textListener);
@@ -120,6 +131,9 @@ public class AddingMeasurementActivity extends AppCompatActivity {
 
         saveButton = findViewById(R.id.add);
         calculateButton = findViewById(R.id.calculate);
+
+        calculateButton.setEnabled(false);
+        saveButton.setEnabled(false);
     }
 
     public static Intent newIntent(Context packageContext){

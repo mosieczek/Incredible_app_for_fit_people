@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        String[] mapFrom = new String[]{"Szyja","Klatka"};
+        String[] mapFrom = new String[]{"Data","Klatka"};
         int[] mapTo = new int[]{R.id.productName,R.id.productLink};
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 

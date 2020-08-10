@@ -1,6 +1,7 @@
 package com.example.incredible_app_for_fit_people;
 
 import android.content.ContentValues;
+import android.widget.EditText;
 
 
 import com.activeandroid.Model;
@@ -8,13 +9,16 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "Measurements", id = "_id")
 public class Measurement extends Model {
 
 
     @Column(name = "Data")
-    private String data;
+    private String date;
     @Column(name = "Szyja")
     private String szyja;
     @Column(name = "Klatka")
@@ -61,14 +65,14 @@ public class Measurement extends Model {
         this.klatkaPiersiowa = klatkaPiersiowa;
     }
 
-    public Measurement(String data, String szyja, String klatkaPiersiowa, String bicepsLewy,
+    public Measurement(String date, String szyja, String klatkaPiersiowa, String bicepsLewy,
                         String bicepsLewyNapiety, String bicepsPrawy, String bicepsPrawyNapiety,
                         String przedramieLewe, String przedramiePrawe, String talia, String brzuch,
                         String biodra, String udoLewe, String udoPrawe, String lydkaLewa,
                         String lydkaPrawa, String tkankaTluszczowa) {
 
         super();
-        this.data = data;
+        this.date = date;
         this.szyja = szyja;
         this.klatkaPiersiowa = klatkaPiersiowa;
         this.bicepsLewy = bicepsLewy;
@@ -84,6 +88,28 @@ public class Measurement extends Model {
         this.udoPrawe = udoPrawe;
         this.lydkaLewa = lydkaLewa;
         this.lydkaPrawa = lydkaPrawa;
+        this.tkankaTluszczowa = tkankaTluszczowa;
+    }
+
+    public Measurement(List<String>list, String date, String tkankaTluszczowa){
+
+        super();
+        this.date = date;
+        this.szyja = list.get(0);
+        this.klatkaPiersiowa = list.get(1);
+        this.bicepsLewy = list.get(2);
+        this.bicepsLewyNapiety = list.get(3);
+        this.bicepsPrawy = list.get(4);
+        this.bicepsPrawyNapiety = list.get(5);
+        this.przedramieLewe = list.get(6);
+        this.przedramiePrawe = list.get(7);
+        this.talia = list.get(8);
+        this.brzuch = list.get(9);
+        this.biodra = list.get(10);
+        this.udoLewe = list.get(11);
+        this.udoPrawe = list.get(12);
+        this.lydkaLewa = list.get(13);
+        this.lydkaPrawa = list.get(14);
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
@@ -109,11 +135,11 @@ public class Measurement extends Model {
 //    }
 
     public String getData() {
-        return data;
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(String date) {
+        this.date = date;
     }
 
     public String getSzyja() {
