@@ -69,8 +69,27 @@ public class AddingMeasurementActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Boolean jestKobieta = true;
                 //funkcja licząca i wpisujaca tluszcz
+                Double talia = Double.valueOf( editTextArrayList.get(8).getText().toString() );
+                Double waga = Double.valueOf( editTextArrayList.get(15).getText().toString() );
 
+                Double a = 4.15d * talia;
+                Double b = a / 2.54d;
+                Double c = 0.082d * waga * 2.2d;
+                Double d = 0d;
+                Double e = waga * 2.2;
+                if( jestKobieta ){
+
+                    d = b - c - 76.76d;
+                } else {
+
+                    d = b - c - 98.42d;
+                }
+
+                Double wynik = d/e * 100d;
+
+                fatEditText.setText( wynik.toString() );
                 saveButton.setEnabled(true);
             }});
 
@@ -109,21 +128,22 @@ public class AddingMeasurementActivity extends AppCompatActivity {
 
     private void initEditTexts(){
 
-        editTextArrayList.add((EditText) findViewById(R.id.szyjaEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.klatkaEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyNapietyEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyNapietyEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.przedramieLeweEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.przedramiePraweEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.taliaEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.brzuchEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.biodraEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.udoLeweEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.udoPraweEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.lydkaLewaEdit));
-        editTextArrayList.add((EditText) findViewById(R.id.lydkaPrawaEdit));
+        editTextArrayList.add((EditText) findViewById(R.id.szyjaEdit));                 //0
+        editTextArrayList.add((EditText) findViewById(R.id.klatkaEdit));                //1
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyEdit));            //2
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyNapietyEdit));     //3
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyEdit));           //4
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyNapietyEdit));    //5
+        editTextArrayList.add((EditText) findViewById(R.id.przedramieLeweEdit));        //6
+        editTextArrayList.add((EditText) findViewById(R.id.przedramiePraweEdit));       //7
+        editTextArrayList.add((EditText) findViewById(R.id.taliaEdit));                 //8
+        editTextArrayList.add((EditText) findViewById(R.id.brzuchEdit));                //9
+        editTextArrayList.add((EditText) findViewById(R.id.biodraEdit));                //10
+        editTextArrayList.add((EditText) findViewById(R.id.udoLeweEdit));               //11
+        editTextArrayList.add((EditText) findViewById(R.id.udoPraweEdit));              //12
+        editTextArrayList.add((EditText) findViewById(R.id.lydkaLewaEdit));             //13
+        editTextArrayList.add((EditText) findViewById(R.id.lydkaPrawaEdit));            //14
+        editTextArrayList.add((EditText) findViewById(R.id.wagaEdit));                  //15
 
         fatEditText = findViewById(R.id.tkankaTluszczowaEdit);
         fatEditText.setEnabled(false);
