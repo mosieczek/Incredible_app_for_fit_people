@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddingMeasurementActivity"></activity>
+        <activity android:name=".EdditingMeasurementActivity"/>
+        <activity android:name=".AddingMeasurementActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +20,17 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="AA_DB_NAME" android:value="db_test" />
-        <meta-data android:name="AA_DB_VERSION" android:value="5" />
+        <meta-data
+            android:name="DB_2"
+            android:value="db_test" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="5" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="${applicationId}"
             android:exported="false" />
-
     </application>
 
 </manifest>

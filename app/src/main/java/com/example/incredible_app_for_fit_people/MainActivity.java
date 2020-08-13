@@ -9,10 +9,13 @@ import androidx.loader.content.Loader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     SimpleCursorAdapter dbAdapter;
 
     private static final int REQUEST_CODE_ADDING = 0;
+    private static final int REQUEST_CODE_EDITING = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +54,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
         lv.setClickable(true);
 
+        setListListener();
     }
 
+    void setListListener(){
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = EdditingMeasurementActivity.newIntent(MainActivity.this);
+                intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
+                startActivityForResult(intent, REQUEST_CODE_EDITING);
+
+            }
+        });
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
         MenuInflater inflater = getMenuInflater();
@@ -60,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {   ///Menu sklada sie z dwóch elementów
-        //Jednym jest dodanie produktu za posrednictwem Skanu QR a drugie przez podanie dnaych przez uzytkownika
-        //W przypadku skanu qr dane mozna pozniej oczywiscie edytowac
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.item_1:
