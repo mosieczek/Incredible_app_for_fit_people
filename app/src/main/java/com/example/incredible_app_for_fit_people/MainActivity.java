@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         switch (item.getItemId()) {
             case R.id.item_1:
-                Intent intent = AddingMeasurementActivity.newIntent(MainActivity.this);
+                Intent intent = AddingMeasurementChoiseActivity.newIntent(MainActivity.this);
                 startActivityForResult(intent, REQUEST_CODE_ADDING);
                 return true;
 
