@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/full_sample"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,417 +13,408 @@
 
 
     <LinearLayout
-        android:id="@+id/full_sample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/szyja"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Szyja" />
-
-            <EditText
-                android:id="@+id/szyjaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/klatka"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Klatka piersiowa" />
-
-            <EditText
-                android:id="@+id/klatkaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/szyja"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Szyja" />
 
-            <TextView
-                android:id="@+id/bicepsLewy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lewy biceps" />
-
-            <EditText
-                android:id="@+id/bicepsLewyEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/szyjaEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/bicepsLewyNapiety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lewy biceps napięty" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/bicepsLewyNapietyEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/klatka"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Klatka piersiowa" />
 
-            <TextView
-                android:id="@+id/bicepsPrawy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Prawy biceps" />
-
-            <EditText
-                android:id="@+id/bicepsPrawyEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/klatkaEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/bicepsPrawyNapiety"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Prawy biceps napięty" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/bicepsPrawyNapietyEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/bicepsLewy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Lewy biceps" />
 
-            <TextView
-                android:id="@+id/przedramieLewe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lewe przedramie" />
-
-            <EditText
-                android:id="@+id/przedramieLeweEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/bicepsLewyEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/przedramiePrawe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Prawe przedramie" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/przedramiePraweEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/bicepsLewyNapiety"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Lewy biceps napięty" />
 
-            <TextView
-                android:id="@+id/talia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Talia" />
-
-            <EditText
-                android:id="@+id/taliaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/bicepsLewyNapietyEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/brzuch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Brzuch" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/brzuchEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/bicepsPrawy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Prawy biceps" />
 
-            <TextView
-                android:id="@+id/biodra"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Biodra" />
-
-            <EditText
-                android:id="@+id/biodraEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/bicepsPrawyEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/udoLewe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Udo lewe" />
-
-            <EditText
-                android:id="@+id/udoLeweEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
+    </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/bicepsPrawyNapiety"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Prawy biceps napięty" />
 
-            <TextView
-                android:id="@+id/udoPrawe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Udo prawe" />
-
-            <EditText
-                android:id="@+id/udoPraweEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/bicepsPrawyNapietyEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/lydkaLewa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lydka lewa" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/lydkaLewaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/przedramieLewe"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Lewe przedramie" />
 
-            <TextView
-                android:id="@+id/lydkaPrawa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lydka prawa" />
-
-            <EditText
-                android:id="@+id/lydkaPrawaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/przedramieLeweEdit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/tkankaTluszczowa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tkanka tluszczowa" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/tkankaTluszczowaEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789."
-                android:ems="10"
-                android:inputType="numberDecimal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/przedramiePrawe"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="Prawe przedramie" />
+
+        <EditText
+            android:id="@+id/przedramiePraweEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/talia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Talia" />
+
+        <EditText
+            android:id="@+id/taliaEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/brzuch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Brzuch" />
+
+        <EditText
+            android:id="@+id/brzuchEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
 
 
-            <Button
-                android:id="@+id/calculate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Oblicz" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dodaj" />
+        <TextView
+            android:id="@+id/biodra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Biodra" />
+
+        <EditText
+            android:id="@+id/biodraEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/udoLewe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Udo lewe" />
+
+        <EditText
+            android:id="@+id/udoLeweEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
 
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/udoPrawe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Udo prawe" />
+
+        <EditText
+            android:id="@+id/udoPraweEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lydkaLewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lydka lewa" />
+
+        <EditText
+            android:id="@+id/lydkaLewaEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lydkaPrawa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lydka prawa" />
+
+        <EditText
+            android:id="@+id/lydkaPrawaEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tkankaTluszczowa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tkanka tluszczowa" />
+
+        <EditText
+            android:id="@+id/tkankaTluszczowaEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oblicz" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dodaj" />
 
 
     </LinearLayout>

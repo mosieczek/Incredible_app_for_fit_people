@@ -61,6 +61,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"></LinearLayout>
 
+            <include
+                android:id="@+id/full_sample_main"
+
+                layout="@layout/full_sample"
+                android:visibility="invisible">
+
+
+            </include>
 
         </LinearLayout>
         >

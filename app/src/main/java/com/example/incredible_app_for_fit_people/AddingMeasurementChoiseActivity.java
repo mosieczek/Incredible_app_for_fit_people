@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -54,13 +55,8 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         addMeasurementsButton = findViewById(R.id.kolejnePomiary);
         addMeasurementsButton.setOnClickListener( view -> {
 
-            mainLL = findViewById(R.id.next);
-            Button button = new Button(this);
-            button.setText("elo");
-
-
-            LinearLayout fullSample = findViewById(R.id.full_sample); ///tutaj jest jakiś błąd :/ :? 
-            mainLL.addView( fullSample );
+            mainLL = findViewById(R.id.full_sample_main);
+            mainLL.setVisibility(View.VISIBLE);
 
         });
     }
