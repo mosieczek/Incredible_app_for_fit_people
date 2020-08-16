@@ -29,7 +29,9 @@ import java.util.stream.Collectors;
 public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
     TextView dataTextView;
+    EditText wagaEdit;
     Button addMeasurementsButton;
+    Button addWeight;
     LinearLayout mainLL;
 
     @Override
@@ -53,11 +55,30 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
     private void addListeners(){
 
         addMeasurementsButton = findViewById(R.id.kolejnePomiary);
+        addWeight = findViewById(R.id.addWeight);
+
+
         addMeasurementsButton.setOnClickListener( view -> {
 
             mainLL = findViewById(R.id.full_sample_main);
             mainLL.setVisibility(View.VISIBLE);
+            addMeasurementsButton.setVisibility(View.GONE);
+            addWeight.setVisibility(View.GONE);
+        });
 
+
+        addWeight.setOnClickListener( view -> {
+
+            wagaEdit = findViewById(R.id.wagaEdit);
+            String weigth = wagaEdit.getText().toString();
+            String currentDate = dataTextView.getText().toString();
+
+            Measurement measurement = new Measurement(weigth,currentDate);
+            measurement.save();
+
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
         });
     }
 

@@ -88,8 +88,15 @@ public class Measurement extends Model {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
+    public Measurement(String waga, String date){
+
+        super();
+        this.date = date;
+        this.waga = waga;
+    }
 
 
+    //DODAWANIE WSZYSTKICH DANYCH
     public Measurement(List<String>list, String date, String tkankaTluszczowa){
 
         super();
@@ -113,6 +120,8 @@ public class Measurement extends Model {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
+
+    //UPDATE WSZYSTKICH DANYCH
     public void updateValues(List<String>list, String date, String tkankaTluszczowa){
 
         this.date = date;
@@ -135,26 +144,7 @@ public class Measurement extends Model {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
-//    public void putValues(){
-//        values = new ContentValues();
-//        values.put(DBHandler.COL1, data);
-//        values.put(DBHandler.COL2, szyja);
-//        values.put(DBHandler.COL3, klatkaPiersiowa);
-//        values.put(DBHandler.COL4, bicepsLewy);
-//        values.put(DBHandler.COL5, bicepsLewyNapiety);
-//        values.put(DBHandler.COL6, bicepsPrawy);
-//        values.put(DBHandler.COL7, bicepsPrawyNapiety);
-//        values.put(DBHandler.COL8, przedramieLewe);
-//        values.put(DBHandler.COL9, przedramiePrawe);
-//        values.put(DBHandler.COL10, talia);
-//        values.put(DBHandler.COL11, brzuch);
-//        values.put(DBHandler.COL12, biodra);
-//        values.put(DBHandler.COL13, udoLewe);
-//        values.put(DBHandler.COL14, udoPrawe);
-//        values.put(DBHandler.COL15, lydkaLewa);
-//        values.put(DBHandler.COL16, lydkaPrawa);
-//        values.put(DBHandler.COL17, tkankaTluszczowa);
-//    }
+
 
     public String getSzyja() {
         return szyja;

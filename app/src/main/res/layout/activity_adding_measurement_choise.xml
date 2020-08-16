@@ -50,6 +50,12 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/addWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dodaj pomiar" />
+
+            <Button
                 android:id="@+id/kolejnePomiary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
