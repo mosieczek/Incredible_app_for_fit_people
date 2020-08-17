@@ -29,10 +29,17 @@ import java.util.stream.Collectors;
 public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
     TextView dataTextView;
+
     EditText wagaEdit;
+    EditText fatEditText;
+
     Button addMeasurementsButton;
     Button addWeight;
+    Button saveButton;
+    Button calculateButton;
     LinearLayout mainLL;
+
+    ArrayList<EditText> editTextArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adding_measurement_choise);
 
         addData();
-        initEditTexts();
+        //initEditTexts();
         addListeners();
     }
 
@@ -64,6 +71,10 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             mainLL.setVisibility(View.VISIBLE);
             addMeasurementsButton.setVisibility(View.GONE);
             addWeight.setVisibility(View.GONE);
+
+            initEditTexts();
+            addFullListeners();
+
         });
 
 
@@ -82,7 +93,122 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         });
     }
 
+
+    private void addFullListeners(){
+
+        saveButton = findViewById(R.id.add);
+        calculateButton = findViewById(R.id.calculate);
+        
+        calculateButton.setEnabled(false);
+        saveButton.setEnabled(false);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                //Przepisanie listy EditText na String
+                List<String> result = editTextArrayList.stream()
+                        .map( x -> x.getText().toString())
+                        .collect(Collectors.toList());
+
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+                Measurement measurement = new Measurement(result, currentDate, fatEditText.getText().toString());
+                measurement.save();
+
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }});
+
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Boolean jestKobieta = true;
+                //funkcja licząca i wpisujaca tluszcz
+                Double talia = Double.valueOf( editTextArrayList.get(8).getText().toString() );
+                Double waga = Double.valueOf( editTextArrayList.get(15).getText().toString() );
+
+                Double a = 4.15d * talia;
+                Double b = a / 2.54d;
+                Double c = 0.082d * waga * 2.2d;
+                Double d = 0d;
+                Double e = waga * 2.2;
+                if( jestKobieta ){
+
+                    d = b - c - 76.76d;
+                } else {
+
+                    d = b - c - 98.42d;
+                }
+
+                Double wynik = d/e * 100d;
+
+                fatEditText.setText( wynik.toString() );
+                saveButton.setEnabled(true);
+            }});
+
+        ///Reakcja na zmiane tekstu
+        TextWatcher textListener = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                ///Jezeli wszystkie pola sa wpisane to przycisk zostanie wlaczony
+                Boolean isFieldsEmpty = true;
+                for(EditText et : editTextArrayList){
+
+                    isFieldsEmpty &= !et.getText().toString().isEmpty();
+                }
+
+                calculateButton.setEnabled(isFieldsEmpty);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        ///Przypisanie watchera do wszstkich pól tekstowych
+        for(EditText et : editTextArrayList){
+
+            et.addTextChangedListener(textListener);
+        }
+    }
+
     private void initEditTexts(){
+
+        editTextArrayList = new ArrayList<>();
+
+        editTextArrayList.add((EditText) findViewById(R.id.szyjaEdit));                 //0
+        editTextArrayList.add((EditText) findViewById(R.id.klatkaEdit));                //1
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyEdit));            //2
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsLewyNapietyEdit));     //3
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyEdit));           //4
+        editTextArrayList.add((EditText) findViewById(R.id.bicepsPrawyNapietyEdit));    //5
+        editTextArrayList.add((EditText) findViewById(R.id.przedramieLeweEdit));        //6
+        editTextArrayList.add((EditText) findViewById(R.id.przedramiePraweEdit));       //7
+        editTextArrayList.add((EditText) findViewById(R.id.taliaEdit));                 //8
+        editTextArrayList.add((EditText) findViewById(R.id.brzuchEdit));                //9
+        editTextArrayList.add((EditText) findViewById(R.id.biodraEdit));                //10
+        editTextArrayList.add((EditText) findViewById(R.id.udoLeweEdit));               //11
+        editTextArrayList.add((EditText) findViewById(R.id.udoPraweEdit));              //12
+        editTextArrayList.add((EditText) findViewById(R.id.lydkaLewaEdit));             //13
+        editTextArrayList.add((EditText) findViewById(R.id.lydkaPrawaEdit));            //14
+        editTextArrayList.add((EditText) findViewById(R.id.wagaEdit));                  //15
+
+        fatEditText = findViewById(R.id.tkankaTluszczowaEdit);
+        fatEditText.setEnabled(false);
+
+
 
 
     }
