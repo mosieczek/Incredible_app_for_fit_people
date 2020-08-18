@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-public class EdditingMeasurementActivity extends AppCompatActivity {
+public class EditingMeasurementActivity extends AppCompatActivity {
 
     ArrayList<EditText> editTextArrayList;
     EditText fatEditText;
@@ -26,25 +25,34 @@ public class EdditingMeasurementActivity extends AppCompatActivity {
     Button calculateButton;
     Measurement measurement;
     Long data_id;
+    TextView dataTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edditing_measurement);
+        setContentView(R.layout.activity_editing_measurement);
 
         editTextArrayList = new ArrayList<>();
 
 
         initEditTexts();
         addValuesFromDB();
+        addData();
         setListeners();
+
     }
 
+    private void addData(){
 
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+        dataTextView = findViewById(R.id.dataView);
+        dataTextView.setText( currentDate );
+    }
 
     public static Intent newIntent(Context packageContext){
 
-        Intent intent = new Intent(packageContext, EdditingMeasurementActivity.class);
+        Intent intent = new Intent(packageContext, EditingMeasurementActivity.class);
         //some put extras if needed
         return intent;
     }

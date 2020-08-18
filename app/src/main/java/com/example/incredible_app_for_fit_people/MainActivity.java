@@ -9,8 +9,6 @@ import androidx.loader.content.Loader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,13 +20,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
-import com.activeandroid.query.Select;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -65,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = EdditingMeasurementActivity.newIntent(MainActivity.this);
+                Intent intent = EditingMeasurementActivity.newIntent(MainActivity.this);
                 intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
                 startActivityForResult(intent, REQUEST_CODE_EDITING);
 
@@ -163,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        String[] mapFrom = new String[]{"Data","Waga", "TkankaTluszczowa"};
+        String[] mapFrom = new String[]{"Data","Waga", "TankaTluszczowa"};
         int[] mapTo = new int[]{R.id.date,R.id.weight, R.id.fat};
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 

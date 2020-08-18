@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddingMeasurementChoiseActivity"></activity>
-        <activity android:name=".EdditingMeasurementActivity" />
+        <activity android:name=".EditingMeasurementActivity" />
         <activity android:name=".AddingMeasurementActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -51,7 +51,7 @@ public class Measurement extends Model {
     private String lydkaPrawa;
     @Column(name = "Waga")
     private String waga;
-    @Column(name = "TkankaTluszczowa")
+    @Column(name = "TankaTluszczowa")
     private String tkankaTluszczowa;
 
 //    private transient ContentValues values;
