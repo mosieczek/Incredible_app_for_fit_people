@@ -11,10 +11,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -70,7 +72,55 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
+        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        lv.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+
+                MenuInflater inflater = actionMode.getMenuInflater(); ///Po wejsciu w tryb multiselect zmieniamy menu w toolbar
+                inflater.inflate(R.menu.delete_menu, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+
+                ///Dodajemy odpowiednie akcje na wcisniecie przyicsku
+                if (menuItem.getItemId() == R.id.multiple_delete) {
+                    deleteSelected();
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+
+            }
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+
+            }
+        });
     }
+
+    private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
+        long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
+
+        for (int i = 0; i < zaznaczone.length; i++) {
+
+            Measurement item = Measurement.load(Measurement.class, zaznaczone[i]);
+            item.delete();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
         MenuInflater inflater = getMenuInflater();
@@ -113,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        String[] mapFrom = new String[]{"Data","TankaTluszczowa"};
-        int[] mapTo = new int[]{R.id.productName,R.id.productLink};
+        String[] mapFrom = new String[]{"Data","Waga", "TankaTluszczowa"};
+        int[] mapTo = new int[]{R.id.date,R.id.weight, R.id.fat};
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 
         lv.setAdapter(dbAdapter);

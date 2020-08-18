@@ -83,8 +83,8 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             wagaEdit = findViewById(R.id.wagaEdit);
             String weigth = wagaEdit.getText().toString();
             String currentDate = dataTextView.getText().toString();
-
-            Measurement measurement = new Measurement(weigth,currentDate);
+            String fat = "Not calculated";
+            Measurement measurement = new Measurement(weigth,currentDate, fat);
             measurement.save();
 
             Intent resultIntent = new Intent();
@@ -98,7 +98,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
         saveButton = findViewById(R.id.add);
         calculateButton = findViewById(R.id.calculate);
-        
+
         calculateButton.setEnabled(false);
         saveButton.setEnabled(false);
 
@@ -157,12 +157,14 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 ///Jezeli wszystkie pola sa wpisane to przycisk zostanie wlaczony
-                Boolean isFieldsEmpty = true;
-                for(EditText et : editTextArrayList){
+                  Boolean isFieldsEmpty = true;
+//                for(EditText et : editTextArrayList){
+//
+//                    isFieldsEmpty &= !et.getText().toString().isEmpty();
+//                }
 
-                    isFieldsEmpty &= !et.getText().toString().isEmpty();
-                }
-
+                isFieldsEmpty &= !editTextArrayList.get(8).getText().toString().isEmpty();
+                isFieldsEmpty &= !editTextArrayList.get(15).getText().toString().isEmpty();
                 calculateButton.setEnabled(isFieldsEmpty);
             }
 

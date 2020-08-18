@@ -88,11 +88,12 @@ public class Measurement extends Model {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
-    public Measurement(String waga, String date){
+    public Measurement(String waga, String date, String tkankaTluszczowa){
 
         super();
         this.date = date;
         this.waga = waga;
+        this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
 
