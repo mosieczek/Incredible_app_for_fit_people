@@ -91,7 +91,7 @@ public class AddingMeasurementActivity extends AppCompatActivity {
                 Double wynik = d/e * 100d;
 
                 fatEditText.setText( new DecimalFormat("##.##").format(wynik) );
-                saveButton.setEnabled(true);
+
             }});
 
         ///Reakcja na zmiane tekstu
@@ -154,7 +154,7 @@ public class AddingMeasurementActivity extends AppCompatActivity {
         calculateButton = findViewById(R.id.calculate);
 
         calculateButton.setEnabled(false);
-        saveButton.setEnabled(false);
+
     }
 
     public static Intent newIntent(Context packageContext){

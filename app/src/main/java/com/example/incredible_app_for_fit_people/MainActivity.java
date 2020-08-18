@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        String[] mapFrom = new String[]{"Data","Waga", "TankaTluszczowa"};
+        String[] mapFrom = new String[]{"Data","Waga", "TkankaTluszczowa"};
         int[] mapTo = new int[]{R.id.date,R.id.weight, R.id.fat};
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 

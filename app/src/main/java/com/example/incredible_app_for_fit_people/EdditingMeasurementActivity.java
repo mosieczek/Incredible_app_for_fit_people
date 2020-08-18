@@ -76,7 +76,7 @@ public class EdditingMeasurementActivity extends AppCompatActivity {
         calculateButton = findViewById(R.id.calculate);
 
         calculateButton.setEnabled(true);
-        saveButton.setEnabled(false);
+
     }
 
     private void addValuesFromDB(){
@@ -133,8 +133,8 @@ public class EdditingMeasurementActivity extends AppCompatActivity {
 
                 Double wynik = d/e * 100d;
 
-                fatEditText.setText( new DecimalFormat("##.##").format(wynik) );
-                saveButton.setEnabled(true);
+                fatEditText.setText( wynik.toString() );
+
             }});
 
 

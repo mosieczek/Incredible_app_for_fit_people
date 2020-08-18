@@ -100,7 +100,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         calculateButton = findViewById(R.id.calculate);
 
         calculateButton.setEnabled(false);
-        saveButton.setEnabled(false);
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -148,7 +148,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
                 Double wynik = d/e * 100d;
 
                 fatEditText.setText( wynik.toString() );
-                saveButton.setEnabled(true);
+
             }});
 
         ///Reakcja na zmiane tekstu
