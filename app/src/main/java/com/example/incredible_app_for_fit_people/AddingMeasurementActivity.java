@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -89,7 +90,7 @@ public class AddingMeasurementActivity extends AppCompatActivity {
 
                 Double wynik = d/e * 100d;
 
-                fatEditText.setText( wynik.toString() );
+                fatEditText.setText( new DecimalFormat("##.##").format(wynik) );
                 saveButton.setEnabled(true);
             }});
 
