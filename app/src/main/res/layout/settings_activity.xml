@@ -5,146 +5,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="8dp"
+<!--    <TableLayout-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="fill_parent"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginBottom="8dp"-->
 
-        android:background="?android:attr/activatedBackgroundIndicator"
-        android:shrinkColumns="*"
-        android:stretchColumns="*"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--        android:background="?android:attr/activatedBackgroundIndicator"-->
+<!--        android:shrinkColumns="*"-->
+<!--        android:stretchColumns="*"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+<!--        <TableRow-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp">-->
 
-            <TextView
-                android:id="@+id/wyborPlci"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/wyborPlciText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
-
-            <RadioButton
-                android:id="@+id/radioKobieta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kobietaText"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <RadioButton
-                android:id="@+id/radioMezczyzna"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mezczyznaText"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
-            <TextView
-                android:id="@+id/wzrostLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/podajWzrostText"
-                />
-            <EditText
-                android:id="@+id/wzrost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kolorWyborText"
-                />
+<!--            <TextView-->
+<!--                android:id="@+id/wyborPlci"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
 
 
-        </TableRow>
-        <RadioGroup
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
+<!--                android:text="@string/wyborPlciText"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp"-->
+<!--            >-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/radioKobieta"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/kobietaText"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+
+<!--                />-->
 
 
-            <TableRow>
-                <RadioButton
-                    android:id="@+id/radiokolor1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kolorJasNiebText"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"/>
+<!--            <RadioButton-->
+<!--                android:id="@+id/radioMezczyzna"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/mezczyznaText"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"/>-->
 
-                <RadioButton
-                    android:id="@+id/radiokolor2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kolorCiemNiebText"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"/>
-            </TableRow>
-            <TableRow>
-                <RadioButton
-                    android:id="@+id/radiokolor3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kolorJasRozText"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"/>
+<!--        </TableRow>-->
 
-                <RadioButton
-                    android:id="@+id/radiokolor4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kolorCiemRozText"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_margin="5dp"/>
-            </TableRow>
+<!--        <TableRow-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp"-->
+<!--            >-->
+<!--            <TextView-->
+<!--                android:id="@+id/wzrostLabel"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/podajWzrostText"-->
+<!--                />-->
+<!--            <EditText-->
+<!--                android:id="@+id/wzrost"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"/>-->
+
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/kolorWyborText"-->
+<!--                />-->
+
+
+<!--        </TableRow>-->
+<!--        <RadioGroup-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content">-->
+
+
+<!--            <TableRow>-->
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radiokolor1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/kolorJasNiebText"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radiokolor2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/kolorCiemNiebText"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_margin="5dp"/>-->
+<!--            </TableRow>-->
+<!--            <TableRow>-->
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radiokolor3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/kolorJasRozText"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radiokolor4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/kolorCiemRozText"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_margin="5dp"/>-->
+<!--            </TableRow>-->
 
 
 
-        </RadioGroup>
+<!--        </RadioGroup>-->
 
 
-    </TableLayout>
+<!--    </TableLayout>-->
+    <FrameLayout
+        android:id="@+id/setting_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -49,6 +53,12 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         addData();
         //initEditTexts();
         addListeners();
+
+
+
+
+
+
     }
 
     private void addData(){
@@ -127,7 +137,12 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Boolean jestKobieta = true;
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext() /* Activity context */);
+                String name = sharedPreferences.getString("gender", "");
+
+                Boolean jestKobieta = name.equals("1") ?  false : true;
+
                 //funkcja licząca i wpisujaca tluszcz
                 Double talia = Double.valueOf( editTextArrayList.get(8).getText().toString() );
                 Double waga = Double.valueOf( editTextArrayList.get(15).getText().toString() );
