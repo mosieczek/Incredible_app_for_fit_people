@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,13 +113,21 @@ public class EditingMeasurementActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-
+        
+        calculateButton.setClickable(false);
         calculateButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                Boolean jestKobieta = true;
+
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext() /* Activity context */);
+                String name = sharedPreferences.getString("gender", "");
+
+                Boolean jestKobieta = name.equals("1") ?  false : true;
+
+
                 //funkcja licząca i wpisujaca tluszcz
                 Double talia = Double.valueOf( editTextArrayList.get(8).getText().toString() );
                 Double waga = Double.valueOf( editTextArrayList.get(15).getText().toString() );
@@ -150,15 +162,48 @@ public class EditingMeasurementActivity extends AppCompatActivity {
                         .map( x -> x.getText().toString())
                         .collect(Collectors.toList());
 
-                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                //String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-                measurement.updateValues( result, currentDate, fatEditText.getText().toString() );
+                measurement.updateValues( result, fatEditText.getText().toString() );
                 measurement.save();
 
                 Intent resultIntent = new Intent();
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }});
+
+        TextWatcher textListener = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                ///Jezeli wszystkie pola sa wpisane to przycisk zostanie wlaczony
+                Boolean isFieldsEmpty = true;
+//                for(EditText et : editTextArrayList){
+//
+//                    isFieldsEmpty &= !et.getText().toString().isEmpty();
+//                }
+
+                isFieldsEmpty &= !editTextArrayList.get(8).getText().toString().isEmpty();
+                isFieldsEmpty &= !editTextArrayList.get(15).getText().toString().isEmpty();
+                calculateButton.setEnabled(isFieldsEmpty);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        ///Przypisanie watchera do wszstkich pól tekstowych
+        for(EditText et : editTextArrayList){
+
+            et.addTextChangedListener(textListener);
+        }
     }
 
 }

@@ -123,9 +123,8 @@ public class Measurement extends Model {
 
 
     //UPDATE WSZYSTKICH DANYCH
-    public void updateValues(List<String>list, String date, String tkankaTluszczowa){
+    public void updateValues(List<String>list, String tkankaTluszczowa){
 
-        this.date = date;
         this.szyja = list.get(0);
         this.klatkaPiersiowa = list.get(1);
         this.bicepsLewy = list.get(2);

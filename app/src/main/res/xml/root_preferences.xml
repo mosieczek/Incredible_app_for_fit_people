@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="First Category">
+
         <CheckBoxPreference
             android:title="Podoba Ci sie aplikacja?"
             android:defaultValue="false"
             android:key="checkboxPref"
-            android:summaryOn="Disable PIN"
-            android:summaryOff="Enable PIN"/>
-    </PreferenceCategory>
+            android:summaryOn="Podoba"
+            android:summaryOff="Nie podoba"/>
 
-    <PreferenceCategory
+
+
         android:title="Second Category">
         <ListPreference
             android:title="Are you boy or a girl?"
@@ -18,13 +17,15 @@
             android:defaultValue="4"
             android:entries="@array/listArray"
             android:entryValues="@array/listValues" />
-    </PreferenceCategory>
 
 
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
+        android:defaultValue=""
+        android:key="heigth"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Edit text preference" />
+        android:title="Wprowadź wzrost"
+        android:digits="0123456789."
+        android:ems="10"
+        />
 </PreferenceScreen>
