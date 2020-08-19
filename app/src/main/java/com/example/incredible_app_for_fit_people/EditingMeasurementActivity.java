@@ -37,18 +37,12 @@ public class EditingMeasurementActivity extends AppCompatActivity {
 
         initEditTexts();
         addValuesFromDB();
-        addData();
+
         setListeners();
 
     }
 
-    private void addData(){
 
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
-        dataTextView = findViewById(R.id.dataView);
-        dataTextView.setText( currentDate );
-    }
 
     public static Intent newIntent(Context packageContext){
 

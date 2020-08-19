@@ -1,0 +1,150 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="8dp"
+
+        android:background="?android:attr/activatedBackgroundIndicator"
+        android:shrinkColumns="*"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/wyborPlci"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Wybierz płeć:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <RadioButton
+                android:id="@+id/radioKobieta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kobieta"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <RadioButton
+                android:id="@+id/radioMezczyzna"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mężczyzna"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+            <TextView
+                android:id="@+id/wzrostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Podaj swój wzrost:"
+                />
+            <EditText
+                android:id="@+id/wzrost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wybierz kolorystykę:"
+                />
+
+
+        </TableRow>
+        <RadioGroup
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+
+
+            <TableRow>
+                <RadioButton
+                    android:id="@+id/radiokolor1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jasno/niebieska"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"/>
+
+                <RadioButton
+                    android:id="@+id/radiokolor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ciemno/niebieska"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"/>
+            </TableRow>
+            <TableRow>
+                <RadioButton
+                    android:id="@+id/radiokolor3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jasno/różowa"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"/>
+
+                <RadioButton
+                    android:id="@+id/radiokolor4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ciemno/niebieska"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"/>
+            </TableRow>
+
+
+
+        </RadioGroup>
+
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
