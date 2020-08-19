@@ -16,4 +16,56 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Activity adding measurement choice -->
+    <string name="dataText">Data</string>
+    <string name="dodajPomText">Dodaj pomiar</string>
+    <string name="chceDodacPomText">Chcę dodać pomiary ciała</string>
+
+    <!-- Activity editing measurement -->
+    <string name="szyjaText">Szyja</string>
+    <string name="klatkaText">Klatka piersiowa</string>
+    <string name="lewyBicText">Lewy biceps</string>
+    <string name="lewyBicNapText">Lewy biceps napięty</string>
+    <string name="prawyBicText">Prawy biceps</string>
+    <string name="prawyBicNapText">Prawy biceps napięty</string>
+    <string name="lewePrzedramieText">Lewe przedramię</string>
+    <string name="prawePrzedramieText">Prawe przedramię</string>
+    <string name="taliaText">Talia</string>
+    <string name="brzuchText">Brzuch</string>
+    <string name="biodraText">Biodra</string>
+    <string name="leweUdoText">Lewe udo</string>
+    <string name="praweUdoText">Prawe udo</string>
+    <string name="lewaLydkaText">Lewa łydka</string>
+    <string name="prawaLydkaText">Prawa łydka</string>
+    <string name="tkankaTluszczowaText">Tkanka Tłuszczowa</string>
+    <string name="wagaText">Waga</string>
+    <string name="dodajText">Dodaj</string>
+    <string name="obliczText">Oblicz</string>
+
+    <!-- Main Activity -->
+    <string name="pomiaryText">pomiary</string>
+    <string name="treningiText">treningi</string>
+    <string name="ustawieniaText">ustawienia</string>
+
+    <!-- Measurements Main Activity-->
+    <string name="pustaText">Lista jest pusta, dodaj wartości</string>
+
+    <!-- Measurements Main Activity-->
+    <string name="wagaKgText">Waga(kg)</string>
+    <string name="tkankaPrText">Tkanka tłuszczowa(%)</string>
+
+    <!-- Settings Activity-->
+    <string name="wyborPlciText">Wybierz płeć:</string>
+    <string name="kobietaText">Kobieta</string>
+    <string name="mezczyznaText">Mężczyzna</string>
+    <string name="podajWzrostText">Podaj swój wzrost:</string>
+    <string name="kolorWyborText">Wybierz kolorystykę:</string>
+    <string name="kolorJasNiebText">jasno/niebieska</string>
+    <string name="kolorCiemNiebText">ciemno/niebieska</string>
+    <string name="kolorJasRozText">jasno/różowa</string>
+    <string name="kolorCiemRozText">ciemno/różowa</string>
+
+
+
 </resources>

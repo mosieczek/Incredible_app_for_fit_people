@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="Wybierz płeć:"
+                android:text="@string/wyborPlciText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +49,7 @@
                 android:id="@+id/radioKobieta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kobieta"
+                android:text="@string/kobietaText"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -57,7 +57,7 @@
                 android:id="@+id/radioMezczyzna"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mężczyzna"
+                android:text="@string/mezczyznaText"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -72,7 +72,7 @@
                 android:id="@+id/wzrostLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Podaj swój wzrost:"
+                android:text="@string/podajWzrostText"
                 />
             <EditText
                 android:id="@+id/wzrost"
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wybierz kolorystykę:"
+                android:text="@string/kolorWyborText"
                 />
 
 
@@ -107,7 +107,7 @@
                     android:id="@+id/radiokolor1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="jasno/niebieska"
+                    android:text="@string/kolorJasNiebText"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_margin="5dp"/>
@@ -116,7 +116,7 @@
                     android:id="@+id/radiokolor2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ciemno/niebieska"
+                    android:text="@string/kolorCiemNiebText"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_margin="5dp"/>
@@ -126,7 +126,7 @@
                     android:id="@+id/radiokolor3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="jasno/różowa"
+                    android:text="@string/kolorJasRozText"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_margin="5dp"/>
@@ -135,7 +135,7 @@
                     android:id="@+id/radiokolor4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ciemno/niebieska"
+                    android:text="@string/kolorCiemRozText"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_margin="5dp"/>

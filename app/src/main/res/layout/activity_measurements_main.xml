@@ -14,7 +14,7 @@
         android:id="@+id/emptyListInformation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lista pusta dodaj wartosci"
+        android:text="@string/pustaText"
         android:textAlignment="center" />
 
     <ListView

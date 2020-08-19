@@ -15,19 +15,19 @@
         android:id="@+id/pomiaryButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Pomiary" />
+        tools:text="@string/pomiaryText" />
 
     <Button
         android:id="@+id/treningiButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Treningi" />
+        tools:text="@string/treningiText" />
 
     <Button
         android:id="@+id/ustawieniaButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Ustawienia" />
+        tools:text="@string/ustawieniaText" />
 
 
 

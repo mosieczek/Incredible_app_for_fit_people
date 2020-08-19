@@ -36,7 +36,7 @@
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Data"
+                android:text="@string/dataText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Waga(kg)"
+                android:text="@string/wagaKgText"
                 app:layout_constraintBottom_toBottomOf="@+id/date"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Tkanka tłuszczowa(%)"
+                android:text="@string/tkankaPrText"
                 app:layout_constraintBottom_toBottomOf="@+id/weight"
                 app:layout_constraintEnd_toEndOf="parent" />
         </TableRow>

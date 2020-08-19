@@ -41,7 +41,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Waga"
+                            android:text="@string/wagaText"
                             android:background="#CCCCFF"/>
 
                         <EditText
@@ -66,13 +66,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Szyja" />
+                            android:text="@string/szyjaText" />
                         <TextView
                             android:id="@+id/klatka"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Klatka piersiowa" />
+                            android:text="@string/klatkaText" />
 
 
                     </TableRow>
@@ -114,14 +114,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Lewy biceps" />
+                            android:text="@string/lewyBicText" />
 
                         <TextView
                             android:id="@+id/bicepsLewyNapiety"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Lewy biceps napięty" />
+                            android:text="@string/lewyBicNapText" />
 
 
 
@@ -165,14 +165,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Prawy biceps" />
+                            android:text="@string/prawyBicText" />
 
                         <TextView
                             android:id="@+id/bicepsPrawyNapiety"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Prawy biceps napięty" />
+                            android:text="@string/prawyBicNapText" />
 
                     </TableRow>
 
@@ -215,14 +215,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Lewe przedramie" />
+                            android:text="@string/lewePrzedramieText" />
 
                         <TextView
                             android:id="@+id/przedramiePrawe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Prawe przedramie" />
+                            android:text="@string/prawePrzedramieText" />
 
 
 
@@ -266,14 +266,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Talia" />
+                            android:text="@string/taliaText" />
 
                         <TextView
                             android:id="@+id/brzuch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Brzuch" />
+                            android:text="@string/brzuchText" />
 
 
                     </TableRow>
@@ -317,14 +317,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Udo lewe" />
+                            android:text="@string/leweUdoText" />
 
                         <TextView
                             android:id="@+id/udoPrawe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Udo prawe" />
+                            android:text="@string/praweUdoText" />
 
 
 
@@ -370,14 +370,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Lydka lewa" />
+                            android:text="@string/lewaLydkaText" />
 
                         <TextView
                             android:id="@+id/lydkaPrawa"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Lydka prawa" />
+                            android:text="@string/prawaLydkaText" />
 
                     </TableRow>
 
@@ -421,7 +421,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
 
-                            android:text="Biodra" />
+                            android:text="@string/biodraText" />
 
 
                     </TableRow>
@@ -446,7 +446,7 @@
                             android:id="@+id/add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dodaj" />
+                            android:text="@string/dodajText" />
 
                     </TableRow>
 
@@ -463,7 +463,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tkanka tluszczowa" />
+                            android:text="@string/tkankaTluszczowaText" />
 
 
 
@@ -489,7 +489,7 @@
                             android:id="@+id/calculate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Oblicz" />
+                            android:text="@string/obliczText" />
 
 
 
