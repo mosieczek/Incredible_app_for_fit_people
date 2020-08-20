@@ -1,4 +1,4 @@
-package com.example.incredible_app_for_fit_people;
+package com.example.incredible_app_for_fit_people.measurements;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
+import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.database.Measurement;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class EditingMeasurementActivity extends AppCompatActivity {
@@ -113,7 +113,7 @@ public class EditingMeasurementActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-        
+
         calculateButton.setClickable(false);
         calculateButton.setOnClickListener(new View.OnClickListener() {
 

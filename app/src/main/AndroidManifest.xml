@@ -10,13 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MeasurementsMainActivity"></activity>
+        <activity android:name=".trainings.AddingTrainingActivity"></activity>
+        <activity android:name=".trainings.TraningMainActivity" />
+        <activity android:name=".measurements.MeasurementsMainActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".AddingMeasurementChoiseActivity" />
-        <activity android:name=".EditingMeasurementActivity" />
-        <activity android:name=".AddingMeasurementActivity" />
+        <activity android:name=".measurements.AddingMeasurementChoiseActivity" />
+        <activity android:name=".measurements.EditingMeasurementActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.incredible_app_for_fit_people;
+package com.example.incredible_app_for_fit_people.settings;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -6,6 +6,7 @@ import android.preference.ListPreference;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.incredible_app_for_fit_people.R;
 
 
 public class SettingsActivity extends AppCompatActivity {

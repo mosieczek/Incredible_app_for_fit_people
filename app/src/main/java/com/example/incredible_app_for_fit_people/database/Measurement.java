@@ -1,4 +1,4 @@
-package com.example.incredible_app_for_fit_people;
+package com.example.incredible_app_for_fit_people.database;
 
 import android.content.ContentValues;
 import android.widget.EditText;

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:shrinkColumns="*"
+            android:stretchColumns="*">
+
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#CCCCFF"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cwiczenie"
+                    android:layout_width="210dp"
+                    android:layout_height="39dp"
+                    android:layout_weight="1"
+                    android:text="Ćwiczenie" />
+
+                <TextView
+                    android:id="@+id/ciezar"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ciężar" />
+
+                <TextView
+                    android:id="@+id/serie"
+                    android:layout_width="107dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Serie" />
+
+                <TextView
+                    android:id="@+id/powtorzenia"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Powtorzenia" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/cwiczenieEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"/>
+
+                <EditText
+                    android:id="@+id/ciezarEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"/>
+
+                <EditText
+                    android:id="@+id/serieEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:digits="0123456789."
+                    android:ems="10"
+                    android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/powtorzeniaEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:digits="0123456789."
+                    android:ems="10"
+                    android:inputType="numberDecimal" />
+
+
+            </TableRow>
+
+
+        </TableLayout>
+

@@ -1,22 +1,10 @@
 package com.example.incredible_app_for_fit_people;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,11 +12,12 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.content.ContentProvider;
+import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
+import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
+import com.example.incredible_app_for_fit_people.trainings.TraningMainActivity;
 
 public class MainActivity extends AppCompatActivity  {
 
-    DBHandler dbHandler;
     TextView dbTextView;
     EditText dbEditText;
     ListView lv;
@@ -77,6 +66,16 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        treningiB = (Button) findViewById(R.id.treningiButton);
+
+        treningiB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TraningMainActivity.class);
                 startActivity(intent);
             }
         });

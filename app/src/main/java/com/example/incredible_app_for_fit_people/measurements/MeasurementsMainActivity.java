@@ -1,4 +1,4 @@
-package com.example.incredible_app_for_fit_people;
+package com.example.incredible_app_for_fit_people.measurements;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
-import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
+import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.database.Measurement;
 
 public class MeasurementsMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -36,7 +35,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurements_main);
-        ActiveAndroid.initialize(this);
+        //ActiveAndroid.initialize(this);
 
 
         lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
