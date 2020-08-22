@@ -27,8 +27,8 @@
         </activity>
 
         <meta-data
-            android:name="DB_2"
-            android:value="db_test" />
+            android:name="DB_TEST2"
+            android:value="db_test2" />
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="5" />

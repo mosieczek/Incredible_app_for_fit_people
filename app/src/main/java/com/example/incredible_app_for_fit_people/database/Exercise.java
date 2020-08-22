@@ -8,8 +8,8 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Exercises", id = "_id")
 public class Exercise extends Model {
 
-    @Column(name = "Nazwa")
-    String nazwa;
+    @Column(name = "Cwiczenie")
+    String cwiczenie;
     @Column(name = "Obciazenie")
     String obciazenie;
     @Column(name = "Serie")
@@ -17,5 +17,23 @@ public class Exercise extends Model {
     @Column(name = "Powtorzenia")
     String powtorzenia;
 
+    @Column(name = "Training")
+    public Traning traning;
 
+    public Exercise(){
+
+        super();
+    }
+
+    public Exercise(Traning traning, String cwiczenie, String obciazenie, String serie, String powtorzenia) {
+
+        super();
+        this.traning = traning;
+
+        this.cwiczenie = cwiczenie;
+        this.obciazenie = obciazenie;
+        this.serie = serie;
+        this.powtorzenia = powtorzenia;
+
+    }
 }

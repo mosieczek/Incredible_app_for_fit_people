@@ -11,18 +11,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.database.Exercise;
+import com.example.incredible_app_for_fit_people.database.Traning;
 import com.example.incredible_app_for_fit_people.measurements.AddingMeasurementChoiseActivity;
 import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class AddingTrainingActivity extends AppCompatActivity {
 
 
     LinearLayout llParent;
     LayoutInflater layoutInflater;
-    View myView;
+    List<View> myView;
+    Button add_traning_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +42,11 @@ public class AddingTrainingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adding_training);
 
         llParent = findViewById(R.id.exercise_ll);
+
+        myView = new ArrayList<>();
+
+        initListeners();
     }
-
-
-    public static Intent newIntent(Context packageContext){
-
-        Intent intent = new Intent(packageContext, AddingTrainingActivity.class);
-        //some put extras if needed
-        return intent;
-    }
-
-
 
 
     ///////////TOOLBAR
@@ -59,14 +65,46 @@ public class AddingTrainingActivity extends AppCompatActivity {
             case R.id.item_1:
 
                 layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                myView = layoutInflater.inflate(R.layout.single_exercise, null, false);
-                llParent.addView(myView);
+                View view = layoutInflater.inflate(R.layout.single_exercise, null, false);
+                myView.add(view);
+                llParent.addView(view);
 
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    private void initListeners(){
+
+        add_traning_btn = findViewById(R.id.add_traning_btn);
+        add_traning_btn.setOnClickListener( view -> {
+
+            Traning traning = new Traning();
+            traning.setDate( new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()) );
+            traning.setType("silowy");
+            traning.save();
+
+            for(int i=0; i < llParent.getChildCount(); i++) {
+
+                EditText cwiczenie = llParent.getChildAt(i).findViewById(R.id.cwiczenieEdit);
+                EditText ciezar = llParent.getChildAt(i).findViewById(R.id.ciezarEdit);
+                EditText serie = llParent.getChildAt(i).findViewById(R.id.serieEdit);
+                EditText powtorzenia = llParent.getChildAt(i).findViewById(R.id.powtorzeniaEdit);
+
+                Exercise item = new Exercise( traning, cwiczenie.getText().toString(), ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
+                item.save();
+
+            }
+
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        });
+
+
     }
 }
 

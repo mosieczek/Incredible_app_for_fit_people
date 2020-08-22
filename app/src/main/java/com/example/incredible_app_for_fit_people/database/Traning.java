@@ -19,4 +19,33 @@ public class Traning extends Model {
     public List<Exercise> exercises() {
         return getMany(Exercise.class, "Exercise");
     }
+
+    public Traning(){
+
+        super();
+    }
+
+    public Traning(String date, String type) {
+
+        super();
+        this.date = date;
+        this.type = type;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
+
