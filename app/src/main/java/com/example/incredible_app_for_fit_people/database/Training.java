@@ -8,24 +8,25 @@ import com.activeandroid.annotation.Table;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "Training", id = "_id")
-public class Traning extends Model {
+@Table(name = "Training", id= "_id")
+public class Training extends Model {
+
 
     @Column(name = "Data")
-    String date;
+    private String date;
     @Column(name = "Typ")
-    String type;
+    private String type;
 
     public List<Exercise> exercises() {
-        return getMany(Exercise.class, "Exercise");
+        return getMany(Exercise.class, "Training");
     }
 
-    public Traning(){
+    public Training(){
 
         super();
     }
 
-    public Traning(String date, String type) {
+    public Training(String date, String type) {
 
         super();
         this.date = date;

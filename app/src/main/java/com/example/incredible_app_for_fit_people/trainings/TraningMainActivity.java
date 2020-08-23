@@ -9,16 +9,19 @@ import androidx.loader.content.Loader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
-import com.example.incredible_app_for_fit_people.database.Measurement;
-import com.example.incredible_app_for_fit_people.database.Traning;
+import com.example.incredible_app_for_fit_people.database.Training;
 
 public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -39,6 +42,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
         startLoader();
 
+        setListListener();
 
     }
 
@@ -65,6 +69,69 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     }
 
 
+    void setListListener(){
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getApplicationContext(), EditingTrainingActivity.class);
+                intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
+                startActivityForResult(intent, 0);
+
+            }
+        });
+
+        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        lv.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+
+                MenuInflater inflater = actionMode.getMenuInflater(); ///Po wejsciu w tryb multiselect zmieniamy menu w toolbar
+                inflater.inflate(R.menu.delete_menu, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+
+                ///Dodajemy odpowiednie akcje na wcisniecie przyicsku
+                if (menuItem.getItemId() == R.id.multiple_delete) {
+                    deleteSelected();
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+
+            }
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+
+            }
+        });
+    }
+
+    private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
+        long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
+
+        for (int i = 0; i < zaznaczone.length; i++) {
+
+            Training item = Training.load(Training.class, zaznaczone[i]);
+            item.delete();
+        }
+    }
+
+
     private void startLoader(){
 
         getSupportLoaderManager().initLoader(0, null, this);
@@ -80,7 +147,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
         return new CursorLoader(this,
-                ContentProvider.createUri(Traning.class, null),
+                ContentProvider.createUri(Training.class, null),
                 null, null, null, null
         );
     }

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".trainings.AddingTrainingActivity"></activity>
+        <activity android:name=".trainings.EditingTrainingActivity"></activity>
+        <activity android:name=".trainings.AddingTrainingActivity" />
         <activity android:name=".trainings.TraningMainActivity" />
         <activity android:name=".measurements.MeasurementsMainActivity" />
         <activity
@@ -27,11 +28,11 @@
         </activity>
 
         <meta-data
-            android:name="DB_TEST2"
-            android:value="db_test2" />
+            android:name="baza"
+            android:value="baza" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="5" />
+            android:value="8" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

@@ -2,7 +2,7 @@ package com.example.incredible_app_for_fit_people.trainings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,13 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Exercise;
-import com.example.incredible_app_for_fit_people.database.Traning;
-import com.example.incredible_app_for_fit_people.measurements.AddingMeasurementChoiseActivity;
-import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
+import com.example.incredible_app_for_fit_people.database.Training;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,10 +79,11 @@ public class AddingTrainingActivity extends AppCompatActivity {
         add_traning_btn = findViewById(R.id.add_traning_btn);
         add_traning_btn.setOnClickListener( view -> {
 
-            Traning traning = new Traning();
-            traning.setDate( new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()) );
-            traning.setType("silowy");
+            String date =  new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            Training traning = new Training(date, "silowy");
             traning.save();
+
+
 
             for(int i=0; i < llParent.getChildCount(); i++) {
 
@@ -94,10 +92,12 @@ public class AddingTrainingActivity extends AppCompatActivity {
                 EditText serie = llParent.getChildAt(i).findViewById(R.id.serieEdit);
                 EditText powtorzenia = llParent.getChildAt(i).findViewById(R.id.powtorzeniaEdit);
 
-                Exercise item = new Exercise( traning, cwiczenie.getText().toString(), ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
+                Exercise item = new Exercise(traning, cwiczenie.getText().toString(), ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString());
                 item.save();
 
             }
+
+
 
             Intent resultIntent = new Intent();
             setResult(RESULT_OK, resultIntent);
