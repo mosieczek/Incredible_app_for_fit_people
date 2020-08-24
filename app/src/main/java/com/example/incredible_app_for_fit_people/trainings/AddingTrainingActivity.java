@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class AddingTrainingActivity extends AppCompatActivity {
+public class AddingTrainingActivity extends AppCompatActivity implements Dialog.DialogListener {
 
 
     LinearLayout llParent;
@@ -61,10 +61,8 @@ public class AddingTrainingActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_1:
 
-                layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                View view = layoutInflater.inflate(R.layout.single_exercise, null, false);
-                myView.add(view);
-                llParent.addView(view);
+                Dialog dialog = new Dialog();
+                dialog.show(getSupportFragmentManager(), "dialog");
 
                 return true;
 
@@ -104,6 +102,20 @@ public class AddingTrainingActivity extends AppCompatActivity {
             finish();
         });
 
+
+    }
+
+    @Override
+    public void applyValues(String cwiczenie, String serie) {
+
+        layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_exercise, null, false);
+
+        EditText cwiczenieEdit = view.findViewById(R.id.cwiczenieEdit);
+        cwiczenieEdit.setText(cwiczenie);
+
+        myView.add(view);
+        llParent.addView(view);
 
     }
 }
