@@ -44,7 +44,7 @@ public class Dialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String cw = cwiczenie.getText().toString();
-                        String sr = serie.getText().toString();
+                        Long sr = Long.valueOf( serie.getText().toString());
 
                         listener.applyValues(cw, sr);
 
@@ -67,6 +67,6 @@ public class Dialog extends AppCompatDialogFragment {
 
     public interface DialogListener{
 
-        void applyValues(String cwiczenie, String serie);
+        void applyValues(String cwiczenie, Long serie);
     }
 }

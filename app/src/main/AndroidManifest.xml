@@ -28,11 +28,11 @@
         </activity>
 
         <meta-data
-            android:name="baza"
-            android:value="baza" />
+            android:name="AA_DB_NAME"
+            android:value="baza_fajna" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="8" />
+            android:value="9" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

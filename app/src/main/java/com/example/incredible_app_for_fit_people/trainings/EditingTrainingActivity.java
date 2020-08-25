@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Exercise;
+import com.example.incredible_app_for_fit_people.database.Series;
 import com.example.incredible_app_for_fit_people.database.Training;
 
 import java.util.ArrayList;
@@ -45,27 +47,40 @@ public class EditingTrainingActivity extends AppCompatActivity {
 
         List<Exercise> exercises = traning.exercises();
 
-        for(int i = 0; i < exercises.size(); i++){
+        for( int i = 0; i < exercises.size(); i++){
 
             layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(R.layout.single_exercise, null, false);
-            myView.add(view);
+            View view = layoutInflater.inflate(R.layout.exercise_layout, null, false);
+
+            EditText cwiczenieEdit = view.findViewById(R.id.cwiczenieEdit);
+            cwiczenieEdit.setText(exercises.get(i).getCwiczenie());
+
+            TableLayout tlParent = view.findViewById(R.id.table_layout);
+
+
+            List<Series> series = exercises.get(i).sets();
+
+            for( int j = 0; j < series.size(); j++){
+
+                layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View serieView = layoutInflater.inflate(R.layout.single_set, null, false);
+
+
+                EditText seria = serieView.findViewById(R.id.serieEdit);
+                EditText ciezar = serieView.findViewById(R.id.ciezarEdit);
+                EditText powtorzenia = serieView.findViewById(R.id.powtorzeniaEdit);
+
+                seria.setText( series.get(j).getSerie() );
+                ciezar.setText( series.get(j).getObciazenie() );
+                powtorzenia.setText( series.get(j).getPowtorzenia() );
+
+
+                tlParent.addView(serieView);
+            }
+
             llParent.addView(view);
+
         }
-
-        for(int i=0; i < llParent.getChildCount(); i++) {
-
-            EditText cwiczenie = llParent.getChildAt(i).findViewById(R.id.cwiczenieEdit);
-            EditText ciezar = llParent.getChildAt(i).findViewById(R.id.ciezarEdit);
-            EditText serie = llParent.getChildAt(i).findViewById(R.id.serieEdit);
-            EditText powtorzenia = llParent.getChildAt(i).findViewById(R.id.powtorzeniaEdit);
-
-            cwiczenie.setText(exercises.get(i).getCwiczenie());
-            ciezar.setText(exercises.get(i).getObciazenie());
-            serie.setText(exercises.get(i).getSerie());
-            powtorzenia.setText(exercises.get(i).getPowtorzenia());
-        }
-
 
     }
 }

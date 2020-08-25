@@ -2,7 +2,6 @@ package com.example.incredible_app_for_fit_people.trainings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Exercise;
+import com.example.incredible_app_for_fit_people.database.Series;
 import com.example.incredible_app_for_fit_people.database.Training;
 
 import java.text.SimpleDateFormat;
@@ -81,17 +82,27 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
             Training traning = new Training(date, "silowy");
             traning.save();
 
-
-
             for(int i=0; i < llParent.getChildCount(); i++) {
 
-                EditText cwiczenie = llParent.getChildAt(i).findViewById(R.id.cwiczenieEdit);
-                EditText ciezar = llParent.getChildAt(i).findViewById(R.id.ciezarEdit);
-                EditText serie = llParent.getChildAt(i).findViewById(R.id.serieEdit);
-                EditText powtorzenia = llParent.getChildAt(i).findViewById(R.id.powtorzeniaEdit);
+                TableLayout tl = llParent.getChildAt(i).findViewById(R.id.table_layout);
 
-                Exercise item = new Exercise(traning, cwiczenie.getText().toString(), ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString());
+                EditText cwiczenie = tl.findViewById(R.id.cwiczenieEdit);
+
+                Exercise item = new Exercise(traning, cwiczenie.getText().toString() );
                 item.save();
+
+
+                for( int j = 0; j < tl.getChildCount() - 2; j++){ ///musimy odjąć cwiczenie i cwiczenieEdit
+
+
+                    EditText ciezar = tl.getChildAt( j + 2).findViewById(R.id.ciezarEdit);
+                    EditText serie = tl.getChildAt( j + 2).findViewById(R.id.serieEdit);
+                    EditText powtorzenia = tl.getChildAt( j + 2).findViewById(R.id.powtorzeniaEdit);
+
+                    Series set = new Series(item, ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
+                    set.save();
+                }
+
 
             }
 
@@ -106,17 +117,31 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
     }
 
     @Override
-    public void applyValues(String cwiczenie, String serie) {
+    public void applyValues(String cwiczenie, Long serie) {
 
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.single_exercise, null, false);
+        View view = layoutInflater.inflate(R.layout.exercise_layout, null, false);
 
         EditText cwiczenieEdit = view.findViewById(R.id.cwiczenieEdit);
         cwiczenieEdit.setText(cwiczenie);
 
-        myView.add(view);
-        llParent.addView(view);
+        TableLayout tlParent = view.findViewById(R.id.table_layout);
 
+
+        for(Integer i = 1; i <= serie; i++){
+
+            layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View serieView = layoutInflater.inflate(R.layout.single_set, null, false);
+            EditText seriaEdit = serieView.findViewById(R.id.serieEdit);
+            seriaEdit.setText( i.toString() );
+
+            //myView.add(serieView);
+            tlParent.addView(serieView);
+        }
+
+
+        //myView.add(view);
+        llParent.addView(view);
     }
 }
 

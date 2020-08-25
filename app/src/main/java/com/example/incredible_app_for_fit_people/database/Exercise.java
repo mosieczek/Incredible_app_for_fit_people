@@ -5,6 +5,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.List;
+
 @Table(name = "Exercise", id="_id")
 public class Exercise extends Model {
 
@@ -13,28 +15,24 @@ public class Exercise extends Model {
 
     @Column(name = "Cwiczenie")
     private String cwiczenie;
-    @Column(name = "Obciazenie")
-    private String obciazenie;
-    @Column(name = "Serie")
-    private String serie;
-    @Column(name = "Powtorzenia")
-    private String powtorzenia;
 
 
+
+    public List<Series> sets() {
+        return getMany(Series.class, "Exercise");
+    }
 
     public Exercise(){
 
         super();
     }
 
-    public Exercise(Training traning, String cwiczenie, String obciazenie, String serie, String powtorzenia) {
+    public Exercise(Training traning, String cwiczenie) {
 
         super();
         this.traning = traning;
         this.cwiczenie = cwiczenie;
-        this.obciazenie = obciazenie;
-        this.serie = serie;
-        this.powtorzenia = powtorzenia;
+
 
     }
 
@@ -44,30 +42,6 @@ public class Exercise extends Model {
 
     public void setCwiczenie(String cwiczenie) {
         this.cwiczenie = cwiczenie;
-    }
-
-    public String getObciazenie() {
-        return obciazenie;
-    }
-
-    public void setObciazenie(String obciazenie) {
-        this.obciazenie = obciazenie;
-    }
-
-    public String getSerie() {
-        return serie;
-    }
-
-    public void setSerie(String serie) {
-        this.serie = serie;
-    }
-
-    public String getPowtorzenia() {
-        return powtorzenia;
-    }
-
-    public void setPowtorzenia(String powtorzenia) {
-        this.powtorzenia = powtorzenia;
     }
 
     public Training getTraning() {
