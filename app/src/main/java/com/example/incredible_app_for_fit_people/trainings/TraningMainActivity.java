@@ -21,6 +21,7 @@ import android.widget.SimpleCursorAdapter;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.database.Cardio;
 import com.example.incredible_app_for_fit_people.database.Training;
 
 public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
@@ -50,7 +51,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.item, menu);
+        inflater.inflate(R.menu.trainings, menu);
         return true;
     }
 
@@ -61,6 +62,11 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
             case R.id.item_1:
                 Intent intent = new Intent(getApplicationContext(), AddingTrainingActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADDING);
+                return true;
+
+            case R.id.item_2:
+                Intent intent2 = new Intent(getApplicationContext(), AddingCardioActivity.class);
+                startActivityForResult(intent2, REQUEST_CODE_ADDING);
                 return true;
 
             default:
@@ -136,8 +142,12 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
         getSupportLoaderManager().initLoader(0, null, this);
 
+
         String[] mapFrom = new String[]{"Data","Typ"};
         int[] mapTo = new int[]{R.id.date,R.id.type};
+        dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null ,mapFrom,mapTo, 0);
+
+        getSupportLoaderManager().initLoader(1, null, this);
         dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null ,mapFrom,mapTo, 0);
 
         lv.setAdapter(dbAdapter);
@@ -146,10 +156,21 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
-        return new CursorLoader(this,
-                ContentProvider.createUri(Training.class, null),
-                null, null, null, null
-        );
+
+        if(arg0 == 1){
+
+            return new CursorLoader(this,
+                    ContentProvider.createUri(Training.class, null),
+                    null, null, null, null
+            );
+        } else {
+
+            return new CursorLoader(this,
+                    ContentProvider.createUri(Cardio.class, null),
+                    null, null, null, null
+            );
+        }
+
     }
 
     @Override

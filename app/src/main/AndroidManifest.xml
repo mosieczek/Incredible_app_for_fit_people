@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".trainings.EditingTrainingActivity"></activity>
+        <activity android:name=".trainings.AddingCardioActivity"></activity>
+        <activity android:name=".trainings.EditingTrainingActivity" />
         <activity android:name=".trainings.AddingTrainingActivity" />
         <activity android:name=".trainings.TraningMainActivity" />
         <activity android:name=".measurements.MeasurementsMainActivity" />
@@ -32,7 +33,7 @@
             android:value="baza_fajna" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="9" />
+            android:value="10" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"
