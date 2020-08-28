@@ -8,7 +8,9 @@ import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -141,13 +143,11 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     private void startLoader(){
 
         getSupportLoaderManager().initLoader(0, null, this);
-
+        //getSupportLoaderManager().initLoader(1, null, this);
 
         String[] mapFrom = new String[]{"Data","Typ"};
         int[] mapTo = new int[]{R.id.date,R.id.type};
-        dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null ,mapFrom,mapTo, 0);
 
-        getSupportLoaderManager().initLoader(1, null, this);
         dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null ,mapFrom,mapTo, 0);
 
         lv.setAdapter(dbAdapter);
@@ -175,12 +175,39 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
-        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
+
+        switch(loader.getId()) {
+
+            case 1: {
+
+                Cursor cursor1 = ((SimpleCursorAdapter)lv.getAdapter()).getCursor();
+
+                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
+                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor1);
+                //getSupportLoaderManager().initLoader(0,null,this);
+
+                break;
+            }
+
+            case 0: {
+                //Raw contact info has been fetched, do whatever you want with it
+
+                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
+                //((SimpleCursorAdapter)lv.getAdapter()).notifyDataSetChanged();
+                getSupportLoaderManager().initLoader(1,null,this);
+
+
+                break;
+            }
+        }
+
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
+
+
     }
 
 
