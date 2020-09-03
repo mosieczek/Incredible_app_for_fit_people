@@ -22,6 +22,9 @@ import android.widget.SimpleCursorAdapter;
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Measurement;
+import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
+import com.example.incredible_app_for_fit_people.trainings.TraningMainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MeasurementsMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -45,6 +48,10 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
         lv.setClickable(true);
 
         setListListener();
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setSelectedItemId(R.id.measurements);
     }
 
     void setListListener(){
@@ -177,5 +184,29 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
     }
 
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch (item.getItemId()) {
+                        case R.id.trenings:
+                            Intent intent = new Intent(getApplicationContext(), TraningMainActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.measurements:
+                            return true;
+                        case R.id.setting:
+                            Intent intent3 = new Intent(getApplicationContext(), SettingsActivity.class);
+                            startActivity(intent3);
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+
+                    return true;
+                }
+            };
 
 }

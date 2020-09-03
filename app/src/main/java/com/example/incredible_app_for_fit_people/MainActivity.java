@@ -1,9 +1,14 @@
 package com.example.incredible_app_for_fit_people;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +19,10 @@ import android.widget.TextView;
 import com.activeandroid.ActiveAndroid;
 import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
 import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
+import com.example.incredible_app_for_fit_people.trainings.AddingCardioActivity;
+import com.example.incredible_app_for_fit_people.trainings.AddingTrainingActivity;
 import com.example.incredible_app_for_fit_people.trainings.TraningMainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -34,183 +42,71 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         ActiveAndroid.initialize(this);
 
-//        dbTextView = (TextView) findViewById(R.id.db_text_view);
-//        dbEditText = (EditText) findViewById(R.id.db_edit_text);
-//
-//        pomiaryB = (Button) findViewById(R.id.pomiaryButton);
-//
-//        lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
-//        startLoader();
-//
-//        lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
-//        lv.setClickable(true);
-//
-//        setListListener();
-        addButtonsListener();
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setSelectedItemId(R.id.trenings);
+
     }
 
-    void addButtonsListener(){
-        pomiaryB = (Button) findViewById(R.id.pomiaryButton);
 
-        pomiaryB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MeasurementsMainActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        ustawieniaB = (Button) findViewById(R.id.ustawieniaButton);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bottom_nav_menu, menu);
+        return true;
+    }
 
-        ustawieniaB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        treningiB = (Button) findViewById(R.id.treningiButton);
-
-        treningiB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        switch (item.getItemId()) {
+            case R.id.trenings:
                 Intent intent = new Intent(getApplicationContext(), TraningMainActivity.class);
                 startActivity(intent);
-            }
-        });
+                return true;
 
+            case R.id.measurements:
+                Intent intent2 = new Intent(getApplicationContext(), MeasurementsMainActivity.class);
+                startActivityForResult(intent2, REQUEST_CODE_ADDING);
+                return true;
+
+            case R.id.setting:
+                Intent intent3 = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent3);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
-//    void setListListener(){
-//
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Intent intent = EditingMeasurementActivity.newIntent(MainActivity.this);
-//                intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
-//                startActivityForResult(intent, REQUEST_CODE_EDITING);
-//
-//            }
-//        });
-//
-//        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-//        lv.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-//            @Override
-//            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-//
-//                MenuInflater inflater = actionMode.getMenuInflater(); ///Po wejsciu w tryb multiselect zmieniamy menu w toolbar
-//                inflater.inflate(R.menu.delete_menu, menu);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-//
-//                ///Dodajemy odpowiednie akcje na wcisniecie przyicsku
-//                if (menuItem.getItemId() == R.id.multiple_delete) {
-//                    deleteSelected();
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public void onDestroyActionMode(ActionMode actionMode) {
-//
-//            }
-//
-//            @Override
-//            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
-//
-//            }
-//        });
-//    }
-//
-//    private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
-//        long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
-//
-//        for (int i = 0; i < zaznaczone.length; i++) {
-//
-//            Measurement item = Measurement.load(Measurement.class, zaznaczone[i]);
-//            item.delete();
-//        }
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) { ///Dodajemy podstawowe menu do toolbara
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.item, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.item_1:
-//                Intent intent = AddingMeasurementChoiseActivity.newIntent(MainActivity.this);
-//                startActivityForResult(intent, REQUEST_CODE_ADDING);
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) { ///Reaction on the return from activity
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_CODE_ADDING) { ///SKAN QR
-//
-//            if (resultCode == RESULT_OK) {
-//
-//
-//               // List<Measurement> measurements = new Select().from(Measurement.class).orderBy("Name ASC").execute();
-//
-//
-//            }
-//        }
-//
-//    }
-//
-//    private void startLoader(){
-//
-//        getSupportLoaderManager().initLoader(0, null, this);
-//
-//        String[] mapFrom = new String[]{"Data","Waga", "TankaTluszczowa"};
-//        int[] mapTo = new int[]{R.id.date,R.id.weight, R.id.fat};
-//        dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
-//
-//        lv.setAdapter(dbAdapter);
-//    }
-//
-//
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
-//        return new CursorLoader(this,
-//                ContentProvider.createUri(Measurement.class, null),
-//                null, null, null, null
-//        );
-//    }
-//
-//    @Override
-//    public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
-//        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
-//    }
-//
-//    @Override
-//    public void onLoaderReset(@NonNull Loader loader) {
-//        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
-//    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                    switch (item.getItemId()) {
+                        case R.id.trenings:
+                            Intent intent = new Intent(getApplicationContext(), TraningMainActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.measurements:
+                            Intent intent2 = new Intent(getApplicationContext(), MeasurementsMainActivity.class);
+                            startActivityForResult(intent2, REQUEST_CODE_ADDING);
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.setting:
+                            Intent intent3 = new Intent(getApplicationContext(), SettingsActivity.class);
+                            startActivity(intent3);
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+
+                    return true;
+                }
+            };
 
 }

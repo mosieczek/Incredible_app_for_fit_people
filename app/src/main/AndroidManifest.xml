@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".trainings.AddingCardioActivity"></activity>
+        <activity android:name=".trainings.AddingCardioActivity" />
         <activity android:name=".trainings.EditingTrainingActivity" />
         <activity android:name=".trainings.AddingTrainingActivity" />
         <activity android:name=".trainings.TraningMainActivity" />

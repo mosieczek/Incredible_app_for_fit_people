@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +9,37 @@
     android:paddingRight="0dp"
     android:usesCleartextTraffic="true">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/emptyListInformation"
+        <TextView
+            android:id="@+id/emptyListInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pustaText"
+            android:textAlignment="center" />
+
+        <ListView
+            android:id="@+id/lista"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            android:choiceMode="multipleChoice" />
+
+
+    </FrameLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pustaText"
-        android:textAlignment="center" />
-
-    <ListView
-        android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:choiceMode="multipleChoice"
-        android:alpha="1"/>
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu" />
 
 
-</LinearLayout>
+
+
+</RelativeLayout>

@@ -25,6 +25,9 @@ import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Cardio;
 import com.example.incredible_app_for_fit_people.database.Training;
+import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
+import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -46,6 +49,10 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
         startLoader();
 
         setListListener();
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setSelectedItemId(R.id.trenings);
 
     }
 
@@ -209,6 +216,30 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch (item.getItemId()) {
+                        case R.id.trenings:
+                            return true;
+                        case R.id.measurements:
+                            Intent intent2 = new Intent(getApplicationContext(), MeasurementsMainActivity.class);
+                            startActivityForResult(intent2, REQUEST_CODE_ADDING);
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.setting:
+                            Intent intent3 = new Intent(getApplicationContext(), SettingsActivity.class);
+                            startActivity(intent3);
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+
+                    return true;
+                }
+            };
 
 
 
