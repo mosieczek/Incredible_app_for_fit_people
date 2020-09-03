@@ -29,22 +29,26 @@ import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainAc
 import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
+public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int REQUEST_CODE_ADDING = 0;
     private ListView lv;
+    private ListView lv2;
     SimpleCursorAdapter dbAdapter;
+    private int list_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_main);
 
+
+        list_id = 1;
+
         lv = findViewById(R.id.exercise_list);
-
         lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
-
         lv.setClickable(true);
+
 
         startLoader();
 
@@ -69,13 +73,34 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
         switch (item.getItemId()) {
             case R.id.item_1:
-                Intent intent = new Intent(getApplicationContext(), AddingTrainingActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ADDING);
+                if( list_id == 1){
+
+                    Intent intent = new Intent(getApplicationContext(), AddingTrainingActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE_ADDING);
+                }
+                if( list_id == 0){
+
+                    Intent intent = new Intent(getApplicationContext(), AddingCardioActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE_ADDING);
+                }
+
                 return true;
 
             case R.id.item_2:
-                Intent intent2 = new Intent(getApplicationContext(), AddingCardioActivity.class);
-                startActivityForResult(intent2, REQUEST_CODE_ADDING);
+
+                if (list_id == 1) {
+
+                    list_id = 0;
+                    getSupportLoaderManager().restartLoader(list_id, null, this);
+
+
+                } else {
+
+                    list_id = 1;
+                    getSupportLoaderManager().restartLoader(list_id,null,this);
+
+                }
+
                 return true;
 
             default:
@@ -84,8 +109,9 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     }
 
 
-    void setListListener(){
+    void setListListener() {
 
+        ///NEED TO ADD CARDIO ACTIVITY AND IF CASE FOR HANDLING 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -136,6 +162,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
         });
     }
 
+
     private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
         long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
 
@@ -147,15 +174,14 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     }
 
 
-    private void startLoader(){
+    private void startLoader() {
 
-        getSupportLoaderManager().initLoader(0, null, this);
-        //getSupportLoaderManager().initLoader(1, null, this);
+        getSupportLoaderManager().initLoader(list_id, null, this);
 
-        String[] mapFrom = new String[]{"Data","Typ"};
-        int[] mapTo = new int[]{R.id.date,R.id.type};
+        String[] mapFrom = new String[]{"Data", "Typ"};
+        int[] mapTo = new int[]{R.id.date, R.id.type};
 
-        dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null ,mapFrom,mapTo, 0);
+        dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null, mapFrom, mapTo, 0);
 
         lv.setAdapter(dbAdapter);
     }
@@ -164,13 +190,14 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
 
-        if(arg0 == 1){
+        if (arg0 == 1) {
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Training.class, null),
                     null, null, null, null
             );
-        } else {
+        }
+        if (arg0 == 0) {
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Cardio.class, null),
@@ -178,37 +205,16 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
             );
         }
 
+        return null;
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
 
-        switch(loader.getId()) {
-
-            case 1: {
-
-                Cursor cursor1 = ((SimpleCursorAdapter)lv.getAdapter()).getCursor();
-
-                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
-                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor1);
-                //getSupportLoaderManager().initLoader(0,null,this);
-
-                break;
-            }
-
-            case 0: {
-                //Raw contact info has been fetched, do whatever you want with it
-
-                ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
-                //((SimpleCursorAdapter)lv.getAdapter()).notifyDataSetChanged();
-                getSupportLoaderManager().initLoader(1,null,this);
-
-
-                break;
-            }
-        }
+        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
 
     }
+
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
