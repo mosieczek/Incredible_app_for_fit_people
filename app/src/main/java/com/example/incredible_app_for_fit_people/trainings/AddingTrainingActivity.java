@@ -25,6 +25,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.incredible_app_for_fit_people.trainings.TraningMainActivity.addRemoveLinearLayout;
+import static com.example.incredible_app_for_fit_people.trainings.TraningMainActivity.addRemoveTableLayout;
+
 public class AddingTrainingActivity extends AppCompatActivity implements Dialog.DialogListener {
 
 
@@ -91,9 +94,7 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
                 Exercise item = new Exercise(traning, cwiczenie.getText().toString() );
                 item.save();
 
-
                 for( int j = 0; j < tl.getChildCount() - 2; j++){ ///musimy odjąć cwiczenie i cwiczenieEdit
-
 
                     EditText ciezar = tl.getChildAt( j + 2).findViewById(R.id.ciezarEdit);
                     EditText serie = tl.getChildAt( j + 2).findViewById(R.id.serieEdit);
@@ -102,12 +103,7 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
                     Series set = new Series(item, ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
                     set.save();
                 }
-
-
             }
-
-
-
             Intent resultIntent = new Intent();
             setResult(RESULT_OK, resultIntent);
             finish();
@@ -122,16 +118,18 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.exercise_layout, null, false);
 
+        addRemoveLinearLayout(view, llParent);
+
         EditText cwiczenieEdit = view.findViewById(R.id.cwiczenieEdit);
         cwiczenieEdit.setText(cwiczenie);
 
         TableLayout tlParent = view.findViewById(R.id.table_layout);
 
-
         for(Integer i = 1; i <= serie; i++){
 
             layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             View serieView = layoutInflater.inflate(R.layout.single_set, null, false);
+            addRemoveTableLayout(serieView, tlParent);
             EditText seriaEdit = serieView.findViewById(R.id.serieEdit);
             seriaEdit.setText( i.toString() );
 

@@ -18,16 +18,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TableLayout;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Cardio;
+import com.example.incredible_app_for_fit_people.database.Exercise;
+import com.example.incredible_app_for_fit_people.database.Series;
 import com.example.incredible_app_for_fit_people.database.Training;
 import com.example.incredible_app_for_fit_people.measurements.MeasurementsMainActivity;
 import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,13 +48,11 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_main);
 
-
         list_id = 1;
 
         lv = findViewById(R.id.exercise_list);
         lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
         lv.setClickable(true);
-
 
         startLoader();
 
@@ -57,7 +61,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.trenings);
-
+        this.setTitle("Siłowy");
     }
 
 
@@ -91,12 +95,14 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
                 if (list_id == 1) {
 
                     list_id = 0;
+                    this.setTitle("Cardio");
                     getSupportLoaderManager().restartLoader(list_id, null, this);
 
 
                 } else {
 
                     list_id = 1;
+                    this.setTitle("Siłowy");
                     getSupportLoaderManager().restartLoader(list_id,null,this);
 
                 }
@@ -116,10 +122,15 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getApplicationContext(), EditingTrainingActivity.class);
-                intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
-                startActivityForResult(intent, 0);
+                if(list_id == 0){
 
+
+                }
+                if(list_id == 1){
+                    Intent intent = new Intent(getApplicationContext(), EditingTrainingActivity.class);
+                    intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
+                    startActivityForResult(intent, 0);
+                }
             }
         });
 
@@ -166,11 +177,33 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
         long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
 
-        for (int i = 0; i < zaznaczone.length; i++) {
+        if(list_id == 0){
 
-            Training item = Training.load(Training.class, zaznaczone[i]);
-            item.delete();
+            for(long l : zaznaczone){
+
+                Cardio cardio = Cardio.load(Cardio.class, l);
+                cardio.delete();
+            }
         }
+        if(list_id == 1){
+
+            for(long l : zaznaczone) {
+
+                Training training = Training.load(Training.class, l);
+                List<Exercise> exercises = training.exercises();
+                //We need to delete each children in database
+                for (int j = 0; j < exercises.size(); j++) {
+
+                    List<Series> series = exercises.get(j).sets();
+                    for (int g = 0; g < series.size(); g++) {
+                        series.get(g).delete();
+                    }
+                    exercises.get(j).delete();
+                }
+                training.delete();
+            }
+        }
+
     }
 
 
@@ -247,6 +280,31 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
                 }
             };
 
+    static public void addRemoveLinearLayout(View mView, LinearLayout layout){
 
+        mView.setClickable(true);
+        mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
 
+                layout.removeView(view);
+                return true;
+            }
+
+        });
+    }
+
+    static public void addRemoveTableLayout(View mView, TableLayout layout){
+
+        mView.setClickable(true);
+        mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                layout.removeView(view);
+                return true;
+            }
+
+        });
+    }
 }

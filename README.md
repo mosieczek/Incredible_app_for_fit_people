@@ -1,1 +1,1 @@
-# mobileApp1
+# Simple app for improving your sport feelings. It supports activities and measurement your body's measurements.

@@ -25,6 +25,7 @@ public class AddingCardioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_cardio);
 
+
         initEditTexts();
         addListeners();
 
