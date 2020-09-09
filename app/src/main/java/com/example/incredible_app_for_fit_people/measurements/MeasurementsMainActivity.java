@@ -8,6 +8,7 @@ import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
@@ -34,24 +36,51 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     private static final int REQUEST_CODE_ADDING = 0;
     private static final int REQUEST_CODE_EDITING = 1;
 
+    private TextView mEmptyList;
+    private AnimationDrawable jinglesAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurements_main);
-        //ActiveAndroid.initialize(this);
-
 
         lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
         startLoader();
 
-        lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
+        mEmptyList = findViewById(R.id.empty_list);
+        lv.setEmptyView(mEmptyList); //Wyswietla informacje o pustej liscie
         lv.setClickable(true);
 
         setListListener();
+        initEasterEgg();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.measurements);
+    }
+
+    private void initEasterEgg () {
+        mEmptyList.setOnClickListener(v -> {
+            if (jinglesAnimation == null) {
+                jinglesAnimation = (AnimationDrawable) mEmptyList.getCompoundDrawables()[1];
+                mEmptyList.post(() -> {
+                    if (jinglesAnimation != null) {
+                        jinglesAnimation.start();
+                    }
+                });
+            } else {
+                stopJingles();
+            }
+        });
+    }
+
+    private void stopJingles () {
+        if (jinglesAnimation != null) {
+            jinglesAnimation.stop();
+            jinglesAnimation = null;
+            mEmptyList.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.jingle_animation, 0, 0);
+
+        }
     }
 
     void setListListener(){

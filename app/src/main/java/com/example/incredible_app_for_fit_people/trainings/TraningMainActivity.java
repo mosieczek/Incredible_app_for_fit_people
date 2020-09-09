@@ -8,6 +8,7 @@ import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,10 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
@@ -37,32 +40,64 @@ import java.util.List;
 
 public class TraningMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int CARDIO = 0;
+    private static final int WEIGTH_TRANING = 1;
     private static final int REQUEST_CODE_ADDING = 0;
     private ListView lv;
-    private ListView lv2;
     SimpleCursorAdapter dbAdapter;
     private int list_id;
+    TextView mEmptyList;
+    private AnimationDrawable jinglesAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises_main);
 
-        list_id = 1;
+        ///Variable which tells is it cardio or common traning
+        list_id = WEIGTH_TRANING;
 
         lv = findViewById(R.id.exercise_list);
-        lv.setEmptyView(findViewById(R.id.emptyListInformation)); //Wyswietla informacje o pustej liscie
+        mEmptyList = findViewById(R.id.empty_list);
+        mEmptyList.setClickable(true);
+        lv.setEmptyView(mEmptyList); //Wyswietla informacje o pustej liscie
         lv.setClickable(true);
 
         startLoader();
-
         setListListener();
+        initEasterEgg();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.trenings);
         this.setTitle("Siłowy");
     }
+
+
+    private void initEasterEgg () {
+        mEmptyList.setOnClickListener(v -> {
+            if (jinglesAnimation == null) {
+                jinglesAnimation = (AnimationDrawable) mEmptyList.getCompoundDrawables()[1];
+                mEmptyList.post(() -> {
+                    if (jinglesAnimation != null) {
+                        jinglesAnimation.start();
+                    }
+                });
+            } else {
+                stopJingles();
+            }
+        });
+    }
+
+    private void stopJingles () {
+        if (jinglesAnimation != null) {
+            jinglesAnimation.stop();
+            jinglesAnimation = null;
+            mEmptyList.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.jingle_animation, 0, 0);
+
+        }
+    }
+
 
 
     @Override
@@ -77,12 +112,12 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
         switch (item.getItemId()) {
             case R.id.item_1:
-                if( list_id == 1){
+                if(list_id == WEIGTH_TRANING){
 
                     Intent intent = new Intent(getApplicationContext(), AddingTrainingActivity.class);
                     startActivityForResult(intent, REQUEST_CODE_ADDING);
                 }
-                if( list_id == 0){
+                if(list_id == CARDIO){
 
                     Intent intent = new Intent(getApplicationContext(), AddingCardioActivity.class);
                     startActivityForResult(intent, REQUEST_CODE_ADDING);
@@ -92,16 +127,16 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
             case R.id.item_2:
 
-                if (list_id == 1) {
+                if (list_id == WEIGTH_TRANING) {
 
-                    list_id = 0;
+                    list_id = CARDIO;
                     this.setTitle("Cardio");
                     getSupportLoaderManager().restartLoader(list_id, null, this);
 
 
                 } else {
 
-                    list_id = 1;
+                    list_id = WEIGTH_TRANING;
                     this.setTitle("Siłowy");
                     getSupportLoaderManager().restartLoader(list_id,null,this);
 
@@ -115,6 +150,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     }
 
 
+
     void setListListener() {
 
         ///NEED TO ADD CARDIO ACTIVITY AND IF CASE FOR HANDLING 
@@ -122,11 +158,11 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(list_id == 0){
+                if(list_id == CARDIO){
 
 
                 }
-                if(list_id == 1){
+                if(list_id == WEIGTH_TRANING){
                     Intent intent = new Intent(getApplicationContext(), EditingTrainingActivity.class);
                     intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
                     startActivityForResult(intent, 0);
@@ -177,7 +213,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     private void deleteSelected() { ///USUNICIE WIELU ELEMENTOW
         long[] zaznaczone = lv.getCheckedItemIds(); ///Pobieramy liste id zaznaczonych elementow
 
-        if(list_id == 0){
+        if(list_id == CARDIO){
 
             for(long l : zaznaczone){
 
@@ -185,7 +221,7 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
                 cardio.delete();
             }
         }
-        if(list_id == 1){
+        if(list_id == WEIGTH_TRANING){
 
             for(long l : zaznaczone) {
 
@@ -223,14 +259,14 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
 
-        if (arg0 == 1) {
+        if (arg0 == WEIGTH_TRANING) {
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Training.class, null),
                     null, null, null, null
             );
         }
-        if (arg0 == 0) {
+        if (arg0 == CARDIO) {
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Cardio.class, null),

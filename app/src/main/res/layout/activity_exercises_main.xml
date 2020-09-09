@@ -7,24 +7,33 @@
     android:orientation="vertical"
     tools:context=".trainings.TraningMainActivity">
 
-    <TextView
-        android:id="@+id/emptyListInformation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/pustaText"
-        android:textAlignment="center" />
 
-    <ListView
-        android:id="@+id/exercise_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="1"
-        android:choiceMode="multipleChoice">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-    </ListView>
+            <TextView
+                android:id="@+id/empty_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableTop="@drawable/jingle_animation"
+                android:gravity="center"
+                android:text="Nic tu nie ma"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
 
-
+        <ListView
+            android:id="@+id/exercise_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            android:choiceMode="multipleChoice">
+        </ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
