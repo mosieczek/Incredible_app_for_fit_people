@@ -160,7 +160,9 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
                 if(list_id == CARDIO){
 
-
+                    Intent intent = new Intent(getApplicationContext(), AddingCardioActivity.class);
+                    intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
+                    startActivityForResult(intent, 0);
                 }
                 if(list_id == WEIGTH_TRANING){
                     Intent intent = new Intent(getApplicationContext(), EditingTrainingActivity.class);

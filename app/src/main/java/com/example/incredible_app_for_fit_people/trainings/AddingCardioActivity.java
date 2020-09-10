@@ -1,6 +1,7 @@
 package com.example.incredible_app_for_fit_people.trainings;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Cardio;
+import com.example.incredible_app_for_fit_people.database.Training;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,18 +18,31 @@ import java.util.Locale;
 
 public class AddingCardioActivity extends AppCompatActivity {
 
-    EditText time;
-    EditText activity;
-    Button addActivity;
+    private EditText time;
+    private EditText activity;
+    private Button addActivity;
+    private long dataBaseID;
+    private boolean isEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_cardio);
 
-
         initEditTexts();
         addListeners();
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            dataBaseID = extras.getLong("id");
+            fetchFromDB();
+            isEditing = true;
+        } else {
+            isEditing = false;
+        }
+
+
 
     }
 
@@ -38,15 +53,27 @@ public class AddingCardioActivity extends AppCompatActivity {
 
             String timeS = time.getText().toString();
             String activityS = activity.getText().toString();
-            String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            if (!isEditing) {
 
-            Cardio cardio = new Cardio(date, "kardio", Long.valueOf(timeS), activityS);
-            cardio.save();
+                String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-            Intent resultIntent = new Intent();
-            setResult(RESULT_OK, resultIntent);
-            finish();
+                Cardio cardio = new Cardio(date, "kardio", Long.valueOf(timeS), activityS);
+                cardio.save();
 
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            } else {
+
+                Cardio cardio = Cardio.load(Cardio.class, dataBaseID);
+                cardio.setActivity(activityS);
+                cardio.setTime(Long.valueOf(timeS));
+                cardio.save();
+
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
         });
     }
 
@@ -54,6 +81,13 @@ public class AddingCardioActivity extends AppCompatActivity {
 
         time = findViewById(R.id.czasEdit);
         activity = findViewById(R.id.aktywnoscEdit);
+    }
+
+    private void fetchFromDB(){
+
+        Cardio cardio = Cardio.load(Cardio.class, dataBaseID);
+        time.setText(cardio.getTime().toString());
+        activity.setText(cardio.getActivity());
     }
 
 

@@ -52,4 +52,20 @@ public class Cardio extends Model {
     public void setType(String type) {
         this.type = type;
     }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
 }
