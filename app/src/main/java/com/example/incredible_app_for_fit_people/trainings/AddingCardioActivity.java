@@ -32,6 +32,7 @@ public class AddingCardioActivity extends AppCompatActivity {
         initEditTexts();
         addListeners();
 
+        ///Checking if it's editing or adding cardio
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.database.Cardio;
 import com.example.incredible_app_for_fit_people.database.Exercise;
 import com.example.incredible_app_for_fit_people.database.Series;
 import com.example.incredible_app_for_fit_people.database.Training;
@@ -33,9 +34,9 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
     LinearLayout llParent;
     LayoutInflater layoutInflater;
-    List<View> myView;
     Button add_traning_btn;
-
+    long dataBaseID;
+    private boolean isEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,17 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
         llParent = findViewById(R.id.exercise_ll);
 
-        myView = new ArrayList<>();
-
         initListeners();
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            dataBaseID = extras.getLong("id");
+            fetchFromDB();
+            isEditing = true;
+        } else {
+            isEditing = false;
+        }
     }
 
 
@@ -81,35 +90,117 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
         add_traning_btn = findViewById(R.id.add_traning_btn);
         add_traning_btn.setOnClickListener( view -> {
 
-            String date =  new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-            Training traning = new Training(date, "silowy");
-            traning.save();
+            if (!isEditing) {
 
-            for(int i=0; i < llParent.getChildCount(); i++) {
+                String date =  new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                addToDB(date);
 
-                TableLayout tl = llParent.getChildAt(i).findViewById(R.id.table_layout);
+            } else {
 
-                EditText cwiczenie = tl.findViewById(R.id.cwiczenieEdit);
+                Training traning = Training.load(Training.class, dataBaseID);
+                String date = traning.getDate();
 
-                Exercise item = new Exercise(traning, cwiczenie.getText().toString() );
-                item.save();
-
-                for( int j = 0; j < tl.getChildCount() - 2; j++){ ///musimy odjąć cwiczenie i cwiczenieEdit
-
-                    EditText ciezar = tl.getChildAt( j + 2).findViewById(R.id.ciezarEdit);
-                    EditText serie = tl.getChildAt( j + 2).findViewById(R.id.serieEdit);
-                    EditText powtorzenia = tl.getChildAt( j + 2).findViewById(R.id.powtorzeniaEdit);
-
-                    Series set = new Series(item, ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
-                    set.save();
-                }
+                //Only temporary
+                //To-Do update instead on deleting and adding new
+                //Need to resolve problem when we want to edit existing exercise and add new as well
+                deleteFromDB(traning);
+                addToDB(date);
             }
+
             Intent resultIntent = new Intent();
             setResult(RESULT_OK, resultIntent);
             finish();
         });
 
+    }
 
+    private void deleteFromDB(Training training) {
+
+        List<Exercise> exercises = training.exercises();
+            //We need to delete each children in database
+        for (int j = 0; j < exercises.size(); j++) {
+
+            List<Series> series = exercises.get(j).sets();
+            for (int g = 0; g < series.size(); g++) {
+                series.get(g).delete();
+            }
+            exercises.get(j).delete();
+        }
+        training.delete();
+    }
+
+    private void addToDB(String date){
+
+        Training traning = new Training(date, "silowy");
+        traning.save();
+
+        for(int i=0; i < llParent.getChildCount(); i++) {
+
+            TableLayout tl = llParent.getChildAt(i).findViewById(R.id.table_layout);
+
+            EditText cwiczenie = tl.findViewById(R.id.cwiczenieEdit);
+
+            Exercise item = new Exercise(traning, cwiczenie.getText().toString() );
+            item.save();
+
+            for( int j = 0; j < tl.getChildCount() - 2; j++){ ///musimy odjąć cwiczenie i cwiczenieEdit
+
+                EditText ciezar = tl.getChildAt( j + 2).findViewById(R.id.ciezarEdit);
+                EditText serie = tl.getChildAt( j + 2).findViewById(R.id.serieEdit);
+                EditText powtorzenia = tl.getChildAt( j + 2).findViewById(R.id.powtorzeniaEdit);
+
+                Series set = new Series(item, ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
+                set.save();
+            }
+        }
+    }
+
+
+    private void fetchFromDB(){
+
+        Intent intent = getIntent();
+        dataBaseID = intent.getLongExtra("id", 4);
+
+        ///Pobieramy cwiczenai
+        Training traning = Training.load(Training.class, dataBaseID);
+        List<Exercise> exercises = traning.exercises();
+
+        for( int i = 0; i < exercises.size(); i++){
+
+            //Dodajemy kolejne cwiczenie do listy
+            layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = layoutInflater.inflate(R.layout.exercise_layout, null, false);
+
+            addRemoveLinearLayout(view, llParent);
+
+            EditText cwiczenieEdit = view.findViewById(R.id.cwiczenieEdit);
+            cwiczenieEdit.setText(exercises.get(i).getCwiczenie());
+
+            TableLayout tlParent = view.findViewById(R.id.table_layout);
+
+            List<Series> series = exercises.get(i).sets();
+
+            for( int j = 0; j < series.size(); j++){
+
+                layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View serieView = layoutInflater.inflate(R.layout.single_set, null, false);
+                addRemoveTableLayout(serieView, tlParent);
+
+                EditText seria = serieView.findViewById(R.id.serieEdit);
+                EditText ciezar = serieView.findViewById(R.id.ciezarEdit);
+                EditText powtorzenia = serieView.findViewById(R.id.powtorzeniaEdit);
+
+                seria.setText( series.get(j).getSerie() );
+                ciezar.setText( series.get(j).getObciazenie() );
+                powtorzenia.setText( series.get(j).getPowtorzenia() );
+
+
+                tlParent.addView(serieView);
+            }
+
+            llParent.addView(view);
+
+        }
     }
 
     @Override

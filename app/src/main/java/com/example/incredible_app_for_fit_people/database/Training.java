@@ -33,6 +33,12 @@ public class Training extends Model {
         this.type = type;
     }
 
+    public void updateTraining(String date, String type) {
+
+        this.date = date;
+        this.type = type;
+    }
+
     public String getDate() {
         return date;
     }

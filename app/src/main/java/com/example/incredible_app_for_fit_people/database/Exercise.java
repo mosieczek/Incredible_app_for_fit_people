@@ -32,8 +32,12 @@ public class Exercise extends Model {
         super();
         this.traning = traning;
         this.cwiczenie = cwiczenie;
+    }
 
+    public void updateExercise(Training traning, String cwiczenie) {
 
+        this.traning = traning;
+        this.cwiczenie = cwiczenie;
     }
 
     public String getCwiczenie() {

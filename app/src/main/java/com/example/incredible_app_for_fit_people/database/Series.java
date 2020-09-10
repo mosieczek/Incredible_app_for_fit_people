@@ -32,6 +32,14 @@ public class Series extends Model {
         this.powtorzenia = powtorzenia;
     }
 
+    public void updateSeries(Exercise exercise, String obciazenie, String serie, String powtorzenia) {
+
+        this.exercise = exercise;
+        this.obciazenie = obciazenie;
+        this.serie = serie;
+        this.powtorzenia = powtorzenia;
+    }
+
     public String getObciazenie() {
         return obciazenie;
     }
