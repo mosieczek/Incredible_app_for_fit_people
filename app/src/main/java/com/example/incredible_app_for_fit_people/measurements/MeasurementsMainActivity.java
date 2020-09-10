@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -39,11 +42,15 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     private TextView mEmptyList;
     private AnimationDrawable jinglesAnimation;
 
+    private boolean isLoaderReloaded;
+    private int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurements_main);
 
+        isLoaderReloaded = false;
         lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
         startLoader();
 
@@ -57,6 +64,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.measurements);
+
     }
 
     private void initEasterEgg () {
@@ -170,14 +178,14 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { ///Reaction on the return from activity
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_ADDING) { ///SKAN QR
+        if (requestCode == REQUEST_CODE_ADDING || requestCode == REQUEST_CODE_EDITING) { ///SKAN QR
 
             if (resultCode == RESULT_OK) {
 
-
+                calculateDiference();
+                isLoaderReloaded = false;
+                counter = 0;
                 // List<Measurement> measurements = new Select().from(Measurement.class).orderBy("Name ASC").execute();
-
-
             }
         }
 
@@ -187,8 +195,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        String[] mapFrom = new String[]{"Data","Waga", "TankaTluszczowa"};
-        int[] mapTo = new int[]{R.id.date,R.id.weight, R.id.fat};
+        String[] mapFrom = new String[]{"_id", "Data","Waga", "TankaTluszczowa", "Difference"};
+        int[] mapTo = new int[]{R.id.id, R.id.date,R.id.weight, R.id.fat, R.id.WeigthDiffText};
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 
         lv.setAdapter(dbAdapter);
@@ -197,20 +205,60 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle cursor) {
+
         return new CursorLoader(this,
                 ContentProvider.createUri(Measurement.class, null),
                 null, null, null, null
         );
+
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
+
+        counter++;
+        if(!isLoaderReloaded || counter == 5){
+
+            calculateDiference();
+            isLoaderReloaded = true;
+        }
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
+
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
-        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
+
+    }
+
+    public void calculateDiference(){
+
+        Log.d("count", String.valueOf(lv.getCount() ));
+        if(lv.getCount() >= 2 ) {
+            for (int i = 0; i < lv.getCount() - 1; i++) {
+                View v = lv.getChildAt(i);
+                View v2 = lv.getChildAt(i + 1);
+
+                TextView id = v2.findViewById(R.id.id);
+                TextView weigth = v.findViewById(R.id.weight);
+                TextView weigth2 = v2.findViewById(R.id.weight);
+
+                Measurement measurement =
+                        Measurement.load(Measurement.class, Long.valueOf(id.getText().toString()));
+
+                if(measurement == null){
+                    break;
+                }
+
+                Float f = Float.valueOf(weigth.getText().toString());
+                Float f2 = Float.valueOf(weigth2.getText().toString());
+
+                Float result =  f2 - f;
+                measurement.setDifference(result.toString());
+                measurement.save();
+
+            }
+        }
     }
 
 

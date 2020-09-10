@@ -53,6 +53,8 @@ public class Measurement extends Model {
     private String waga;
     @Column(name = "TankaTluszczowa")
     private String tkankaTluszczowa;
+    @Column(name = "Difference")
+    private String difference;
 
 //    private transient ContentValues values;
 
@@ -86,6 +88,7 @@ public class Measurement extends Model {
         this.lydkaPrawa = lydkaPrawa;
         this.waga = waga;
         this.tkankaTluszczowa = tkankaTluszczowa;
+        this.difference = "";
     }
 
     public Measurement(String waga, String date, String tkankaTluszczowa){
@@ -122,6 +125,7 @@ public class Measurement extends Model {
     }
 
 
+
     //UPDATE WSZYSTKICH DANYCH
     public void updateValues(List<String>list, String tkankaTluszczowa){
 
@@ -144,7 +148,9 @@ public class Measurement extends Model {
         this.tkankaTluszczowa = tkankaTluszczowa;
     }
 
-
+    public void setDifference(String difference) {
+        this.difference = difference;
+    }
 
     public String getSzyja() {
         return szyja;

@@ -167,6 +167,7 @@ public class EditingMeasurementActivity extends AppCompatActivity {
                 measurement.updateValues( result, fatEditText.getText().toString() );
                 measurement.save();
 
+
                 Intent resultIntent = new Intent();
                 setResult(RESULT_OK, resultIntent);
                 finish();
