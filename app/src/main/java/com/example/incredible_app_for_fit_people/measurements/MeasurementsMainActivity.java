@@ -42,15 +42,14 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     private TextView mEmptyList;
     private AnimationDrawable jinglesAnimation;
 
-    private boolean isLoaderReloaded;
     private int counter = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurements_main);
 
-        isLoaderReloaded = false;
         lv = findViewById(R.id.lista);  ///Tworze obiekt list View i dodaje odpowiednie listenery
         startLoader();
 
@@ -97,8 +96,11 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = EditingMeasurementActivity.newIntent(MeasurementsMainActivity.this);
-                intent.putExtra("id", id);  ///wysyłamy id (mogą pojawić się błędy w przyszłości jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
+                Intent intent = EditingMeasurementActivity
+                        .newIntent(MeasurementsMainActivity.this);
+                intent.putExtra("id", id);
+                ///wysyłamy id (mogą pojawić się błędy w przyszłości
+                // jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
                 startActivityForResult(intent, REQUEST_CODE_EDITING);
 
             }
@@ -109,7 +111,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
             @Override
             public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 
-                MenuInflater inflater = actionMode.getMenuInflater(); ///Po wejsciu w tryb multiselect zmieniamy menu w toolbar
+                MenuInflater inflater = actionMode.getMenuInflater();
+                ///Po wejsciu w tryb multiselect zmieniamy menu w toolbar
                 inflater.inflate(R.menu.delete_menu, menu);
                 return true;
             }
@@ -137,7 +140,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
             }
 
             @Override
-            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+            public void onItemCheckedStateChanged(ActionMode actionMode,
+                                                  int i, long l, boolean b) {
 
             }
         });
@@ -150,7 +154,10 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
             Measurement item = Measurement.load(Measurement.class, zaznaczone[i]);
             item.delete();
+
         }
+        counter = 0;
+        startActivity(getIntent());
     }
 
     @Override
@@ -165,7 +172,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
         switch (item.getItemId()) {
             case R.id.item_1:
-                Intent intent = AddingMeasurementChoiseActivity.newIntent(MeasurementsMainActivity.this);
+                Intent intent = AddingMeasurementChoiseActivity
+                        .newIntent(MeasurementsMainActivity.this);
                 startActivityForResult(intent, REQUEST_CODE_ADDING);
                 return true;
 
@@ -175,17 +183,22 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) { ///Reaction on the return from activity
+    ///Reaction on the return from activity
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_ADDING || requestCode == REQUEST_CODE_EDITING) { ///SKAN QR
-
+        if (requestCode == REQUEST_CODE_EDITING) {
             if (resultCode == RESULT_OK) {
 
-                calculateDiference();
-                isLoaderReloaded = false;
                 counter = 0;
-                // List<Measurement> measurements = new Select().from(Measurement.class).orderBy("Name ASC").execute();
+            }
+        }
+
+        if (requestCode == REQUEST_CODE_ADDING) {
+            if (resultCode == RESULT_OK) {
+
+                startActivity(getIntent());
+                counter = 0;
             }
         }
 
@@ -215,12 +228,10 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
-
-        counter++;
-        if(!isLoaderReloaded || counter == 5){
+        //IDK but cursor needs to be reloaded a few time to properly find new measurement
+        if(counter < 3){
 
             calculateDiference();
-            isLoaderReloaded = true;
         }
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
 
@@ -229,6 +240,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
 
+        ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
     }
 
     public void calculateDiference(){
@@ -256,6 +268,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
                 Float result =  f2 - f;
                 measurement.setDifference(result.toString());
                 measurement.save();
+
+                counter++;
 
             }
         }
