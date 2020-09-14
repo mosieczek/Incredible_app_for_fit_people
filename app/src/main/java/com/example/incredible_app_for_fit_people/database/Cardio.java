@@ -14,9 +14,8 @@ public class Cardio extends Model {
     private String date;
     @Column(name = "Typ")
     private String type;
-
     @Column(name = "Time")
-    private Long time;
+    private String time;
 
     @Column(name = "Activity")
     private String activity;
@@ -28,7 +27,7 @@ public class Cardio extends Model {
         super();
     }
 
-    public Cardio(String date, String type, Long time, String activity) {
+    public Cardio(String date, String type, String time, String activity) {
 
         super();
         this.date = date;
@@ -53,11 +52,11 @@ public class Cardio extends Model {
         this.type = type;
     }
 
-    public Long getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Long time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
