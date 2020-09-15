@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.example.incredible_app_for_fit_people.R;
@@ -37,7 +39,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
     Button saveButton;
     Button calculateButton;
     LinearLayout mainLL;
-
+    ScrollView mMainSv;
     ArrayList<EditText> editTextArrayList;
 
     @Override
@@ -48,10 +50,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         addData();
         //initEditTexts();
         addListeners();
-
-
-
-
 
 
     }
@@ -76,6 +74,12 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             mainLL.setVisibility(View.VISIBLE);
             addMeasurementsButton.setVisibility(View.GONE);
             addWeight.setVisibility(View.GONE);
+
+
+            mMainSv = findViewById(R.id.main_scroll_v);
+            mMainSv.setBackgroundResource(R.drawable.chlop);
+            mMainSv.setAlpha(0.5F);
+            mainLL.setAlpha(1);
 
             initEditTexts();
             addFullListeners();

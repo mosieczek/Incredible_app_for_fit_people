@@ -35,6 +35,7 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
     LinearLayout llParent;
     LayoutInflater layoutInflater;
     Button add_traning_btn;
+    EditText mEditTextTitle;
     long dataBaseID;
     private boolean isEditing;
 
@@ -131,7 +132,8 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
     private void addToDB(String date){
 
-        Training traning = new Training(date, "silowy");
+        mEditTextTitle = findViewById(R.id.exercise_title_edit);
+        Training traning = new Training(date, mEditTextTitle.getText().toString());
         traning.save();
 
         for(int i=0; i < llParent.getChildCount(); i++) {
@@ -145,11 +147,15 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
             for( int j = 0; j < tl.getChildCount() - 2; j++){ ///musimy odjąć cwiczenie i cwiczenieEdit
 
-                EditText ciezar = tl.getChildAt( j + 2).findViewById(R.id.ciezarEdit);
-                EditText serie = tl.getChildAt( j + 2).findViewById(R.id.serieEdit);
-                EditText powtorzenia = tl.getChildAt( j + 2).findViewById(R.id.powtorzeniaEdit);
+                EditText ciezar = tl.getChildAt( j + 2)
+                        .findViewById(R.id.ciezarEdit);
+                EditText serie = tl.getChildAt( j + 2)
+                        .findViewById(R.id.serieEdit);
+                EditText powtorzenia = tl.getChildAt( j + 2)
+                        .findViewById(R.id.powtorzeniaEdit);
 
-                Series set = new Series(item, ciezar.getText().toString(), serie.getText().toString(), powtorzenia.getText().toString() );
+                Series set = new Series(item, ciezar.getText().toString(),
+                        serie.getText().toString(), powtorzenia.getText().toString() );
                 set.save();
             }
         }
@@ -160,10 +166,13 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
         Intent intent = getIntent();
         dataBaseID = intent.getLongExtra("id", 4);
+        mEditTextTitle = findViewById(R.id.exercise_title_edit);
 
-        ///Pobieramy cwiczenai
+        ///Pobieramy cwiczenaia
         Training traning = Training.load(Training.class, dataBaseID);
         List<Exercise> exercises = traning.exercises();
+
+        mEditTextTitle.setText(traning.getTitle());
 
         for( int i = 0; i < exercises.size(); i++){
 
@@ -205,6 +214,9 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
 
     @Override
     public void applyValues(String cwiczenie, Long serie) {
+
+        add_traning_btn = findViewById(R.id.add_traning_btn);
+        add_traning_btn.setVisibility(View.VISIBLE);
 
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.exercise_layout, null, false);

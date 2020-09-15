@@ -58,7 +58,7 @@ public class AddingCardioActivity extends AppCompatActivity {
 
                 String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-                Cardio cardio = new Cardio(date, "kardio", timeS, activityS);
+                Cardio cardio = new Cardio(date, activityS, timeS);
                 cardio.save();
 
                 Intent resultIntent = new Intent();
@@ -67,7 +67,6 @@ public class AddingCardioActivity extends AppCompatActivity {
             } else {
 
                 Cardio cardio = Cardio.load(Cardio.class, dataBaseID);
-                cardio.setActivity(activityS);
                 cardio.setTime(timeS);
                 cardio.save();
 
@@ -87,11 +86,7 @@ public class AddingCardioActivity extends AppCompatActivity {
     private void fetchFromDB(){
 
         Cardio cardio = Cardio.load(Cardio.class, dataBaseID);
-        time.setText(cardio.getTime().toString());
-        activity.setText(cardio.getActivity());
+        activity.setText(cardio.getTitle());
+        time.setText(cardio.getTime());
     }
-
-
-
-
 }

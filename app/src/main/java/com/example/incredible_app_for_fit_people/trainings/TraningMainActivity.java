@@ -249,8 +249,8 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
         getSupportLoaderManager().initLoader(list_id, null, this);
 
-        String[] mapFrom = new String[]{"Data", "Typ"};
-        int[] mapTo = new int[]{R.id.date, R.id.type};
+        String[] mapFrom = new String[]{"Data", "Title"};
+        int[] mapTo = new int[]{R.id.date, R.id.title};
 
         dbAdapter = new SimpleCursorAdapter(this, R.layout.exercise_list_table, null, mapFrom, mapTo, 0);
 

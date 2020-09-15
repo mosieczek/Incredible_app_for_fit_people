@@ -29,10 +29,10 @@
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="baza_fajna2" />
+            android:value="data_base" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="11" />
+            android:value="1" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

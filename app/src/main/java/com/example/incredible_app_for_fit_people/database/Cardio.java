@@ -12,13 +12,10 @@ public class Cardio extends Model {
 
     @Column(name = "Data")
     private String date;
-    @Column(name = "Typ")
-    private String type;
+    @Column(name = "Title")
+    private String title;
     @Column(name = "Time")
     private String time;
-
-    @Column(name = "Activity")
-    private String activity;
 
 
 
@@ -27,13 +24,12 @@ public class Cardio extends Model {
         super();
     }
 
-    public Cardio(String date, String type, String time, String activity) {
+    public Cardio(String date, String type, String time) {
 
         super();
         this.date = date;
-        this.type = type;
+        this.title = type;
         this.time = time;
-        this.activity = activity;
     }
 
     public String getDate() {
@@ -44,12 +40,12 @@ public class Cardio extends Model {
         this.date = date;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTime() {
@@ -60,11 +56,4 @@ public class Cardio extends Model {
         this.time = time;
     }
 
-    public String getActivity() {
-        return activity;
-    }
-
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
 }

@@ -16,6 +16,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:id="@+id/exercise_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tytul" />
+
+            <EditText
+                android:id="@+id/exercise_title_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Podaj Tytul" />
+
             <LinearLayout
                 android:id="@+id/exercise_ll"
                 android:layout_width="match_parent"
@@ -26,11 +39,14 @@
 
             </LinearLayout>
 
+
+
             <Button
                 android:id="@+id/add_traning_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Button"
+                tools:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

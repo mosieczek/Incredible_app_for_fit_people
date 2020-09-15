@@ -14,8 +14,8 @@ public class Training extends Model {
 
     @Column(name = "Data")
     private String date;
-    @Column(name = "Typ")
-    private String type;
+    @Column(name = "Title")
+    private String title;
 
     public List<Exercise> exercises() {
         return getMany(Exercise.class, "Training");
@@ -30,13 +30,13 @@ public class Training extends Model {
 
         super();
         this.date = date;
-        this.type = type;
+        this.title = type;
     }
 
     public void updateTraining(String date, String type) {
 
         this.date = date;
-        this.type = type;
+        this.title = type;
     }
 
     public String getDate() {
@@ -47,12 +47,12 @@ public class Training extends Model {
         this.date = date;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
 
