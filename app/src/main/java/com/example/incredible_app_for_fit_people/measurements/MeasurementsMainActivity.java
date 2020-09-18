@@ -26,10 +26,14 @@ import android.widget.TextView;
 
 import com.activeandroid.content.ContentProvider;
 import com.example.incredible_app_for_fit_people.R;
+import com.example.incredible_app_for_fit_people.adapters.FormatCursorAdapter;
 import com.example.incredible_app_for_fit_people.database.Measurement;
 import com.example.incredible_app_for_fit_people.settings.SettingsActivity;
 import com.example.incredible_app_for_fit_people.trainings.TraningMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class MeasurementsMainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -210,6 +214,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
         String[] mapFrom = new String[]{"_id", "Data","Waga", "TankaTluszczowa", "Difference"};
         int[] mapTo = new int[]{R.id.id, R.id.date,R.id.weight, R.id.fat, R.id.WeigthDiffText};
+
         dbAdapter = new SimpleCursorAdapter(this, R.layout.list_table, null ,mapFrom,mapTo, 0);
 
         lv.setAdapter(dbAdapter);
@@ -221,7 +226,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
         return new CursorLoader(this,
                 ContentProvider.createUri(Measurement.class, null),
-                null, null, null, null
+                null, null, null, "Data DESC"
         );
 
     }

@@ -91,7 +91,7 @@ public class Measurement extends Model {
         this.difference = "";
     }
 
-    public Measurement(String waga, String date, String tkankaTluszczowa){
+    public Measurement(String date, String waga, String tkankaTluszczowa){
 
         super();
         this.date = date;

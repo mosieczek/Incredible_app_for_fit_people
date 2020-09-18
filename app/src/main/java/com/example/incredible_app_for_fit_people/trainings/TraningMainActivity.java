@@ -265,14 +265,14 @@ public class TraningMainActivity extends AppCompatActivity implements LoaderMana
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Training.class, null),
-                    null, null, null, null
+                    null, null, null, "Data DESC"
             );
         }
         if (arg0 == CARDIO) {
 
             return new CursorLoader(this,
                     ContentProvider.createUri(Cardio.class, null),
-                    null, null, null, null
+                    null, null, null, "Data DESC"
             );
         }
 

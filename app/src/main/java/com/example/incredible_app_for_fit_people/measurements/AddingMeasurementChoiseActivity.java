@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.incredible_app_for_fit_people.R;
 import com.example.incredible_app_for_fit_people.database.Measurement;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,9 +92,11 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
             wagaEdit = findViewById(R.id.wagaEdit);
             String weigth = wagaEdit.getText().toString();
-            String currentDate = dataTextView.getText().toString();
+            //String currentDate = dataTextView.getText().toString();
+            Date date = new Date();
+
             String fat = "Not calculated";
-            Measurement measurement = new Measurement(weigth,currentDate, fat);
+            Measurement measurement = new Measurement(date.toString(), weigth, fat);
             measurement.save();
 
             Intent resultIntent = new Intent();
@@ -121,9 +124,9 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
                         .map( x -> x.getText().toString())
                         .collect(Collectors.toList());
 
-                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                Date date = new Date();
 
-                Measurement measurement = new Measurement(result, currentDate, fatEditText.getText().toString());
+                Measurement measurement = new Measurement(result, date.toString(), fatEditText.getText().toString());
                 measurement.save();
 
                 Intent resultIntent = new Intent();
@@ -223,9 +226,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
         fatEditText = findViewById(R.id.tkankaTluszczowaEdit);
         fatEditText.setEnabled(false);
-
-
-
 
     }
 

@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/headingFat"
-                android:layout_width="wrap_content"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/tkankaPrText"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=""
-                android:textSize="18sp"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,7 +105,7 @@
                 android:inputType="number|text"
                 android:maxWidth="120dp"
                 android:text=""
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/weight"
                 app:layout_constraintEnd_toEndOf="parent" />

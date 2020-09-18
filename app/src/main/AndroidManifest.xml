@@ -29,10 +29,10 @@
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="data_base" />
+            android:value="data_base2" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:value="2" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"
