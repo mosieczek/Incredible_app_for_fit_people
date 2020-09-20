@@ -133,7 +133,7 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
     private void addToDB(String date){
 
         mEditTextTitle = findViewById(R.id.exercise_title_edit);
-        Training traning = new Training(date, mEditTextTitle.getText().toString());
+        Training traning = new Training(getAndFormatDate(), mEditTextTitle.getText().toString());
         traning.save();
 
         for(int i=0; i < llParent.getChildCount(); i++) {
@@ -203,7 +203,6 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
                 ciezar.setText( series.get(j).getObciazenie() );
                 powtorzenia.setText( series.get(j).getPowtorzenia() );
 
-
                 tlParent.addView(serieView);
             }
 
@@ -244,5 +243,14 @@ public class AddingTrainingActivity extends AppCompatActivity implements Dialog.
         //myView.add(view);
         llParent.addView(view);
     }
+
+    private String getAndFormatDate(){
+
+        Date date = new Date();
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }
+
 }
 

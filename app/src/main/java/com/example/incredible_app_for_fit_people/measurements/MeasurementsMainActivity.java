@@ -48,7 +48,6 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
     private int counter = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,10 +102,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
                 Intent intent = EditingMeasurementActivity
                         .newIntent(MeasurementsMainActivity.this);
                 intent.putExtra("id", id);
-                ///wysyłamy id (mogą pojawić się błędy w przyszłości
-                // jak dodamy możliwość usuwania obiektów) (chociaż wcale nie muszą :)
-                startActivityForResult(intent, REQUEST_CODE_EDITING);
 
+                startActivityForResult(intent, REQUEST_CODE_EDITING);
             }
         });
 
@@ -160,8 +157,8 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
             item.delete();
 
         }
-        counter = 0;
-        startActivity(getIntent());
+        //counter = 0;
+        //startActivity(getIntent());
     }
 
     @Override
@@ -234,10 +231,10 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
     @Override
     public void onLoadFinished(@NonNull Loader loader, Cursor cursor) {
         //IDK but cursor needs to be reloaded a few time to properly find new measurement
-        if(counter < 3){
-
-            calculateDiference();
-        }
+//        if(counter < 3){
+//
+//            calculateDiference();
+//        }
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(cursor);
 
     }
@@ -248,13 +245,16 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
         ((SimpleCursorAdapter)lv.getAdapter()).swapCursor(null);
     }
 
+
+    ///This function works but makes aplication working slowly and
+    ///Need to be refactored/writen diferent way
     public void calculateDiference(){
 
         Log.d("count", String.valueOf(lv.getCount() ));
         if(lv.getCount() >= 2 ) {
-            for (int i = 0; i < lv.getCount() - 1; i++) {
+            for (int i = lv.getCount() - 1; i > 0; i--) {
                 View v = lv.getChildAt(i);
-                View v2 = lv.getChildAt(i + 1);
+                View v2 = lv.getChildAt(i - 1);
 
                 TextView id = v2.findViewById(R.id.id);
                 TextView weigth = v.findViewById(R.id.weight);

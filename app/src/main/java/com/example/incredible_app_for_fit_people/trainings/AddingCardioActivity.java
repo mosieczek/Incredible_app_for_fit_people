@@ -42,9 +42,6 @@ public class AddingCardioActivity extends AppCompatActivity {
         } else {
             isEditing = false;
         }
-
-
-
     }
 
     private void addListeners() {
@@ -56,9 +53,7 @@ public class AddingCardioActivity extends AppCompatActivity {
             String activityS = activity.getText().toString();
             if (!isEditing) {
 
-                String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
-                Cardio cardio = new Cardio(date, activityS, timeS);
+                Cardio cardio = new Cardio(getAndFormatDate(), activityS, timeS);
                 cardio.save();
 
                 Intent resultIntent = new Intent();
@@ -89,4 +84,13 @@ public class AddingCardioActivity extends AppCompatActivity {
         activity.setText(cardio.getTitle());
         time.setText(cardio.getTime());
     }
+
+    private String getAndFormatDate(){
+
+        Date date = new Date();
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.incredible_app_for_fit_people.measurements;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,9 +57,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
     }
 
     private void addData(){
-
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
         dataTextView = findViewById(R.id.dataView);
         dataTextView.setText( currentDate );
     }
@@ -67,7 +66,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
         addMeasurementsButton = findViewById(R.id.kolejnePomiary);
         addWeight = findViewById(R.id.addWeight);
-
 
         addMeasurementsButton.setOnClickListener( view -> {
 
@@ -78,9 +76,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
 
             mMainSv = findViewById(R.id.main_scroll_v);
-            mMainSv.setBackgroundResource(R.drawable.chlop);
-            mMainSv.setAlpha(0.5F);
-            mainLL.setAlpha(1);
 
             initEditTexts();
             addFullListeners();
@@ -92,11 +87,10 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
             wagaEdit = findViewById(R.id.wagaEdit);
             String weigth = wagaEdit.getText().toString();
-            //String currentDate = dataTextView.getText().toString();
-            Date date = new Date();
+
 
             String fat = "Not calculated";
-            Measurement measurement = new Measurement(date.toString(), weigth, fat);
+            Measurement measurement = new Measurement(getAndFormatDate(), weigth, fat);
             measurement.save();
 
             Intent resultIntent = new Intent();
@@ -124,9 +118,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
                         .map( x -> x.getText().toString())
                         .collect(Collectors.toList());
 
-                Date date = new Date();
-
-                Measurement measurement = new Measurement(result, date.toString(), fatEditText.getText().toString());
+                Measurement measurement = new Measurement(result, getAndFormatDate(), fatEditText.getText().toString());
                 measurement.save();
 
                 Intent resultIntent = new Intent();
@@ -136,6 +128,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
 
@@ -143,17 +136,17 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext() /* Activity context */);
                 String name = sharedPreferences.getString("gender", "");
 
-                Boolean jestKobieta = name.equals("1") ?  false : true;
+                boolean jestKobieta = name.equals("1") ?  false : true;
 
                 //funkcja licząca i wpisujaca tluszcz
-                Double talia = Double.valueOf( editTextArrayList.get(8).getText().toString() );
-                Double waga = Double.valueOf( editTextArrayList.get(15).getText().toString() );
+                double talia = Double.parseDouble(editTextArrayList.get(8).getText().toString());
+                double waga = Double.parseDouble(editTextArrayList.get(15).getText().toString());
 
-                Double a = 4.15d * talia;
-                Double b = a / 2.54d;
-                Double c = 0.082d * waga * 2.2d;
-                Double d = 0d;
-                Double e = waga * 2.2;
+                double a = 4.15d * talia;
+                double b = a / 2.54d;
+                double c = 0.082d * waga * 2.2d;
+                double d = 0d;
+                double e = waga * 2.2;
                 if( jestKobieta ){
 
                     d = b - c - 76.76d;
@@ -162,9 +155,9 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
                     d = b - c - 98.42d;
                 }
 
-                Double wynik = d/e * 100d;
+                double wynik = d/e * 100d;
 
-                fatEditText.setText( wynik.toString() );
+                fatEditText.setText(Double.toString(wynik));
 
             }});
 
@@ -174,7 +167,7 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 ///Jezeli wszystkie pola sa wpisane to przycisk zostanie wlaczony
-                  Boolean isFieldsEmpty = true;
+                Boolean isFieldsEmpty = true;
 //                for(EditText et : editTextArrayList){
 //
 //                    isFieldsEmpty &= !et.getText().toString().isEmpty();
@@ -236,6 +229,12 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
         return intent;
     }
 
+    private String getAndFormatDate(){
 
+        Date date = new Date();
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }
 
 }
