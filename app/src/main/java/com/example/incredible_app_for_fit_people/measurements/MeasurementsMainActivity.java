@@ -99,7 +99,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = EditingMeasurementActivity
+                Intent intent = AddingMeasurementChoiseActivity
                         .newIntent(MeasurementsMainActivity.this);
                 intent.putExtra("id", id);
 
@@ -198,7 +198,7 @@ public class MeasurementsMainActivity extends AppCompatActivity implements Loade
         if (requestCode == REQUEST_CODE_ADDING) {
             if (resultCode == RESULT_OK) {
 
-                startActivity(getIntent());
+                //startActivity(getIntent());
                 counter = 0;
             }
         }

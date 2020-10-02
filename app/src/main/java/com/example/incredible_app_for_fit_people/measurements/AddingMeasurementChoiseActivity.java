@@ -44,14 +44,35 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
     ScrollView mMainSv;
     ArrayList<EditText> editTextArrayList;
 
+    long dataBaseID;
+    private boolean isEditing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_measurement_choise);
 
-        addData();
-        //initEditTexts();
-        addListeners();
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            dataBaseID = extras.getLong("id");
+            isEditing = true;
+
+            addData();
+            initEditTexts();
+            addFullListeners();
+            fetchFromDB();
+        } else {
+            isEditing = false;
+
+            addData();
+            addListeners();
+        }
+
+    }
+
+    private void fetchFromDB() {
 
 
     }
@@ -69,14 +90,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
         addMeasurementsButton.setOnClickListener( view -> {
 
-            mainLL = findViewById(R.id.full_sample_main);
-            mainLL.setVisibility(View.VISIBLE);
-            addMeasurementsButton.setVisibility(View.GONE);
-            addWeight.setVisibility(View.GONE);
-
-
-            mMainSv = findViewById(R.id.main_scroll_v);
-
             initEditTexts();
             addFullListeners();
 
@@ -87,7 +100,6 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
             wagaEdit = findViewById(R.id.wagaEdit);
             String weigth = wagaEdit.getText().toString();
-
 
             String fat = "Not calculated";
             Measurement measurement = new Measurement(getAndFormatDate(), weigth, fat);
@@ -101,6 +113,19 @@ public class AddingMeasurementChoiseActivity extends AppCompatActivity {
 
 
     private void addFullListeners(){
+
+        if(isEditing){
+
+            addMeasurementsButton = findViewById(R.id.kolejnePomiary);
+            addWeight = findViewById(R.id.addWeight);
+        }
+
+        mainLL = findViewById(R.id.full_sample_main);
+        mainLL.setVisibility(View.VISIBLE);
+        addMeasurementsButton.setVisibility(View.GONE);
+        addWeight.setVisibility(View.GONE);
+
+        mMainSv = findViewById(R.id.main_scroll_v);
 
         saveButton = findViewById(R.id.add);
         calculateButton = findViewById(R.id.calculate);
